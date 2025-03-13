@@ -1,56 +1,20 @@
-import Image from "next/image";
 import NavMock from "@/components/UI/NavMock";
 import BannerMovie from "@/components/UI/banner/BannerMovie";
+import MovieCarouselMock from "@/components/MovieCarouselMock";
 import movies from "@/app/lib/movies.json";
 
-export default function Landing() {
+export default function Netflix() {
+  const movieRow1 = movies;
+  const movieRow2 = movies.slice().reverse();
+
   return (
     <main className="flex flex-col text-white font-sans h-[150vh]">
       <NavMock />
       <BannerMovie />
       <div className="mt-[-10%] pl-20 text-2xl flex-grow">
         <div className="relative flex flex-col h-full w-full justify-evenly">
-          <div className="overflow-hidden whitespace-nowrap">
-            <span>Your Next Watch</span>
-            <div className="flex gap-2 mt-4">
-              {movies.map((movie) => (
-                <div
-                  key={movie.id}
-                  className="w-[275px] h-[155px] rounded-sm shrink-0 cursor-not-allowed"
-                >
-                  <Image
-                    src={movie.thumbnail}
-                    alt="movie thumbnail"
-                    height={155}
-                    width={275}
-                    className="object-fit"
-                  />
-
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="overflow-hidden whitespace-nowrap">
-            <span>Top Searches</span>
-            <div className="flex gap-2 mt-4">
-              {movies.slice().reverse().map((movie) => (
-                <div
-                  key={movie.id}
-                  className="w-[275px] h-[155px] rounded-sm shrink-0 cursor-not-allowed"
-                >
-                  <Image
-                    src={movie.thumbnail}
-                    alt="movie thumbnail"
-                    height={155}
-                    width={275}
-                    className="object-fit"
-                  />
-
-                </div>
-              ))}
-            </div>
-          </div>
+          <MovieCarouselMock movieList={movieRow1} header="Your Next Watch" />
+          <MovieCarouselMock movieList={movieRow2} header="Top Searches" />
 
           {/* GAMES - No more :( */}
           {/* <div className="overflow-x-hidden whitespace-nowrap">

@@ -17,12 +17,6 @@ export default function NavMock() {
           }
         </div>
       </div>
-      {/* <Image
-        src="/refactor-logo.png"
-        alt="refactor-logo"
-        width={100}
-        height={100}
-      /> */}
       <Image
         src="/mock-login.png"
         alt="mock login"
