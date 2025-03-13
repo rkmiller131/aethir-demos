@@ -64,6 +64,7 @@ export default function PlayNowButton() {
           alt="play icon"
           height={20}
           width={20}
+          className="h-10 lg:h-[20px]"
         />
         {isLoading ? "Checking availability..." :
          isStarting ? "Starting game" :
