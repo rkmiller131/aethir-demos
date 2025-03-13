@@ -46,6 +46,14 @@ export async function endGame() {
 }
 
 /**
+ * Used to manually end the game session without redirecting;
+ * Does not redirect to the password screen
+ */
+export async function endGameInPlace() {
+  await endGameSession();
+}
+
+/**
  * Server action to update the activity timestamp
  * Called periodically while playing to keep the session alive
 */
