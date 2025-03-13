@@ -36,7 +36,7 @@ export default function BannerMovie() {
           <PlayNowButton />
           <Link
             className="flex items-center gap-2 p-2 px-6 bg-gray-300/50 hover:bg-gray-400/50 rounded-sm cursor-pointer"
-            href="https://www.refactorgames.com/"
+            href="https://www.fifa.com/en"
             target="_blank"
             referrerPolicy="no-referrer"
           >
