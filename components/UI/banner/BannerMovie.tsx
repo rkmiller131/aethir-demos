@@ -64,7 +64,7 @@ export default function BannerMovie() {
         autoPlay
         muted
         loop
-        className="h-full w-full object-cover z-[-1]"
+        className="h-full w-full object-cover z-[-1] bg-white"
       >
         <source src="https://cdn.glitch.me/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/banner-movie.mp4?v=1741788746068" type="video/mp4" />
       </video>
