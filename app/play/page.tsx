@@ -60,7 +60,24 @@ export default function Play() {
       checkAvailability();
     }, 10000);
 
-    return () => clearInterval(intervalId);
+    // Handle tab closing/refreshing
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+      if (navigator.sendBeacon) {
+        // Create a FormData object to send
+        const formData = new FormData();
+        navigator.sendBeacon('/api/end-session', formData);
+      }
+
+      event.preventDefault();
+      return ''; // For older browsers
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      clearInterval(intervalId);
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    }
   }, [stingerEnded]);
 
   if (!stingerEnded) {
