@@ -13,7 +13,6 @@ export default function PlayNowButton() {
     try {
       setIsLoading(true);
       const result = await checkGameAvailability();
-      console.log('result', result);
       setIsGameAvailable(result.isAvailable);
     } catch (error) {
       console.error("Error checking game availability:", error);
