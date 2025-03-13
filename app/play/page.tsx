@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 import NetflixStinger from "@/components/NetflixStinger";
 import { checkGameAvailability, endGame, getGameStreamUrl } from "../actions";
 
@@ -21,7 +21,7 @@ export default function Play() {
     } catch (error) {
       console.error("Error loading game URL:", error);
       setTimeout(() => {
-        router.push("/");
+        router.push("/netflix");
       }, 2000);
     }
   }
@@ -29,6 +29,11 @@ export default function Play() {
   const handleBack = async () => {
     await endGame();
   }
+
+  const handleStingerEnd = ():void => {
+    setStingerEnded(true);
+    sessionStorage.setItem("hasStingerPlayed", "true");
+  };
 
   useEffect(() => {
     if (stingerEnded) {
@@ -42,7 +47,7 @@ export default function Play() {
           setTimeoutAlert(true);
           await endGame();
           setTimeout(() => {
-            router.push("/");
+            router.push("/netflix");
           }, 3000);
         }
       } catch (error) {
@@ -57,11 +62,6 @@ export default function Play() {
 
     return () => clearInterval(intervalId);
   }, [stingerEnded]);
-
-  const handleStingerEnd = ():void => {
-    setStingerEnded(true);
-    sessionStorage.setItem("hasStingerPlayed", "true");
-  };
 
   if (!stingerEnded) {
     return <NetflixStinger onEnd={handleStingerEnd} />;

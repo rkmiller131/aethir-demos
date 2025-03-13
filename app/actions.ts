@@ -73,7 +73,7 @@ export async function checkPassword(password: string) {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       maxAge: 60 * 60, // 1 hour
-      path: "/landing",
+      path: "/netflix",
     });
 
     return { success: true };

@@ -1,7 +1,7 @@
 /**
- * Session timeout in milliseconds (5 minutes)
+ * Session timeout in milliseconds (30 minutes)
 */
-export const SESSION_TIMEOUT_MS = 2 * 60 * 1000;
+export const SESSION_TIMEOUT_MS = 30 * 60 * 1000;
 
 /**
  * Cookie name for storing game session ID

@@ -13,7 +13,7 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  if (request.nextUrl.pathname.startsWith("/landing")) {
+  if (request.nextUrl.pathname.startsWith("/netflix")) {
     const authToken = request.cookies.get("auth")?.value;
     const isAuthenticated = !!authToken;
 
@@ -27,5 +27,5 @@ export async function middleware(request: NextRequest) {
 
 // Paths this middleware applies to
 export const config = {
-  matcher: ["/landing/:path*", "/play/:path*"],
+  matcher: ["/netflix/:path*", "/play/:path*"],
 };

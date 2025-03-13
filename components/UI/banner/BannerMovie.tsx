@@ -19,17 +19,17 @@ export default function BannerMovie() {
   return (
     <div className="h-[63%] flex flex-col">
       {/* Overlay */}
-      <div className="absolute z-0 top-0 left-0 w-full h-[100%] bg-gradient-to-t from-[#141414] to-transparent from-0% to-15%" />
+      <div className="absolute z-0 top-0 left-0 w-full h-[105%] bg-gradient-to-t from-[#141414] to-transparent from-0% to-15%" />
       {/* FIFA LOGO */}
       <Image
         src="/FIFA-logo.png"
         alt="FIFA logo"
         height={500}
         width={500}
-        className="absolute z-5 pl-20 top-[35%] drop-shadow-md"
+        className="absolute z-5 pl-5 lg:pl-20 top-[35%] drop-shadow-md"
       />
       {/* Buttons */}
-      <div className="absolute z-5 pl-20 top-[60%] w-[99.9%] flex justify-between">
+      <div className="absolute z-5 pl-5 lg:pl-20 top-[60%] w-[99.9%] flex flex-col lg:flex-row lg:justify-between">
         <div className="flex gap-2">
           <PlayNowButton />
           <Link

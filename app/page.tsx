@@ -13,13 +13,13 @@ export default function PasswordProtection() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-    setError('');
+    setError("");
 
     try {
       const result = await checkPassword(password);
       if (result.success) {
         // Redirect to protected content
-        router.push("/landing");
+        router.push("/netflix");
       } else {
         setError("Incorrect password");
         setPassword("");

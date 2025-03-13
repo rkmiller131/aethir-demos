@@ -8,6 +8,7 @@ interface NetflixStingerProps {
 
 export default function NetflixStinger({ onEnd }: NetflixStingerProps) {
   useEffect(() => {
+    sessionStorage.setItem("hasStingerPlayed", "false");
     const videoElement = document.getElementById("netflix-stinger") as HTMLVideoElement
 
     videoElement.addEventListener("ended", onEnd)
