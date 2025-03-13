@@ -21,7 +21,7 @@ export default function NetflixStinger({ onEnd }: NetflixStingerProps) {
 
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-black z-10">
-      <video id="netflix-stinger" className="w-full h-full object-cover" preload="auto" autoPlay src="/netflix-stinger.mp4" />
+      <video id="netflix-stinger" className="w-full h-full object-cover" preload="auto" autoPlay src="/new-stinger.mp4" />
     </div>
   );
 }
