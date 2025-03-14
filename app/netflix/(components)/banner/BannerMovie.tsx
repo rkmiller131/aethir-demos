@@ -17,9 +17,11 @@ export default function BannerMovie() {
   }
 
   return (
-    <div className="h-[63%] flex flex-col">
+    // <div className="h-[63%] flex flex-col">
+    <div className="h-[46.25vw] flex flex-col mt-[-60px]">
       {/* Overlay */}
-      <div className="hidden lg:block absolute z-0 top-0 left-0 w-full h-[105%] bg-gradient-to-t from-[#141414] to-transparent from-0% to-15%" />
+      {/* <div className="hidden lg:block absolute z-0 top-0 left-0 w-full h-[105%] bg-gradient-to-t from-[#141414] to-transparent from-0% to-15%" /> */}
+      <div className="absolute inset-x-0 top-0 bottom-0 bg-gradient-to-br from-black/60 to-transparent opacity-100 transition-opacity duration-500" />
       {/* FIFA LOGO */}
       <div className="flex justify-center sm:justify-start">
         <Image
@@ -70,6 +72,7 @@ export default function BannerMovie() {
       >
         <source src="https://cdn.glitch.me/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/banner-movie.mp4?v=1741788746068" type="video/mp4" />
       </video>
+      <div className="absolute left-0 right-0 top-auto bottom-[-1px] w-full h-[14.7vw] z-0 bg-gradient-to-b from-[hsla(0,0%,8%,0)] via-[hsla(0,0%,8%,0.15)_15%] via-[hsla(0,0%,8%,0.35)_29%] via-[hsla(0,0%,8%,0.58)_44%] via-[#141414_68%] to-[#141414] bg-[length:100%_100%] bg-[repeat:repeat-x] bg-[position:0_top] opacity-100"></div>
     </div>
   );
 }
