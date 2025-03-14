@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
-import PlayNowButton from "@/components/UI/buttons/PlayNowButton";
+import PlayNowButton from "@/app/netflix/(components)/banner/buttons/PlayNowButton";
 import MoreInfoButton from "./buttons/MoreInfoButton";
 
 export default function BannerMovie() {
