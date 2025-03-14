@@ -9,7 +9,7 @@ export default function EmergencyRedButton() {
   }
   return (
     <button
-      className="bg-red-700 text-white p-2 rounded-full fixed bottom-4 right-4 hover:bg-red-900 cursor-pointer"
+      className="bg-red-700 text-white p-2 rounded-full fixed bottom-4 right-4 hover:bg-red-900 pointer-events-all cursor-pointer"
       onClick={handleStopGame}
     >
       <Image
