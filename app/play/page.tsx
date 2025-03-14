@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from 'next/navigation';
-import NetflixStinger from "@/components/NetflixStinger";
+import NetflixStinger from "@/app/netflix/(components)/NetflixStinger";
 import { checkGameAvailability, endGame, getGameStreamUrl } from "../actions";
 
 

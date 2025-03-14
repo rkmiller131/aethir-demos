@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import PlayNowButton from "../buttons/PlayNowButton";
+import PlayNowButton from "@/components/UI/buttons/PlayNowButton";
 
 export default function BannerMovie() {
   const videoRef = useRef<HTMLVideoElement>(null);
