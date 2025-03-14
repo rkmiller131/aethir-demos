@@ -55,16 +55,16 @@ export default function PlayNowButton() {
   return (
     <>
       <button
-        className="flex items-center gap-2 px-6 bg-white text-black text-lg font-bold rounded-sm cursor-pointer hover:bg-gray-300"
+        className="flex items-center gap-1 lg:gap-2 px-2 lg:px-4 py-0 lg:px-6 lg:py-4 bg-white text-black text-[2.5vw] lg:text-3xl font-bold rounded-sm cursor-pointer hover:bg-gray-300"
         disabled={!isGameAvailable || isLoading || isStarting}
         onClick={handlePlayNow}
       >
         <Image
           src="/play-icon.svg"
           alt="play icon"
-          height={20}
-          width={20}
-          className="h-10 lg:h-[20px]"
+          height={30}
+          width={30}
+          className="h-[10px] sm:h-[15px] lg:h-[30px] w-auto"
         />
         {isLoading ? "Checking availability..." :
          isStarting ? "Starting game" :
