@@ -1,4 +1,4 @@
-import { Movie } from "@/app/lib/types/netflix.types";
+import { Movie } from "@/app/lib/types";
 import Image from "next/image";
 
 interface MovieCarouselMockProps {

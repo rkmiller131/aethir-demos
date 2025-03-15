@@ -5,7 +5,6 @@ import {
   getGameAvailability,
   startGameSession,
   endGameSession,
-  updateActivityTimestamp,
   getGameUrl,
   initializeGameState
 } from "@/app/lib/gameState";
@@ -54,14 +53,6 @@ export async function endGameInPlace() {
 }
 
 /**
- * Server action to update the activity timestamp
- * Called periodically while playing to keep the session alive
-*/
-export async function heartbeat() {
-  return updateActivityTimestamp();
-}
-
-/**
  * Server action to get the game URL
  * Called by the game page to load the iframe
 */
@@ -80,7 +71,7 @@ export async function checkPassword(password: string) {
     (await cookies()).set("auth", "true", {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      maxAge: 60 * 60, // 1 hour
+      maxAge: 30 * 60, // 30 minutes
       path: "/netflix",
     });
 

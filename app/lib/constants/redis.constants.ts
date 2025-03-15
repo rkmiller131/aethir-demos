@@ -1,23 +1,23 @@
 /**
  * Redis key constants
- * These are the keys we use to store game state in Redis
+ * https://redis.io/docs/latest/develop/use/keyspace/
  */
 export const REDIS_KEYS = {
   /**
-   * Stores whether someone is currently playing (value: "0" or "1")
+   * Stores an array of all possible client container urls
   */
-  IS_PLAYING: "game:is_playing", // "game:" is a prefix naming convention to namespace the keys
+  CLIENT_CONTAINERS: "game:client_containers",
 
   /**
-   * Stores the current session ID for the active player (value: UUID string)
+   * Currently only one container per player, but option to feed multiple
+   * controllers to a single container for "multiplayer" even remotely.
+   * Stores an array of containers currently in use.
   */
-  SESSION_ID: "game:session_id",
+  ACTIVE_CONTAINER_IDS: "game:active_container_ids",
 
   /**
-   * Stores the timestamp of the last activity from the player (value: timestamp number)
+   * Session mapping;
+   * Hash mapping session IDs to container IDs
   */
-  LAST_ACTIVITY: "game:last_activity",
+  USER_SESSIONS: "game:user_sessions",
 };
-
-export const SOMEONE_PLAYING = 1;
-export const NO_ONE_PLAYING = 0;

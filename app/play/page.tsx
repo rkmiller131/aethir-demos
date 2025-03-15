@@ -27,6 +27,10 @@ export default function Play() {
   }
 
   const handleBack = async () => {
+    const stopStream = document.querySelector(".stop");
+    if (stopStream) {
+      stopStream.dispatchEvent(new Event("click"));
+    }
     await endGame();
   }
 
@@ -62,14 +66,18 @@ export default function Play() {
 
     // Handle tab closing/refreshing
     const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+      const stopStream = document.querySelector(".stop");
+      if (stopStream) {
+        stopStream.dispatchEvent(new Event("click"));
+      }
       if (navigator.sendBeacon) {
         // Create a FormData object to send
         const formData = new FormData();
-        navigator.sendBeacon('/api/end-session', formData);
+        navigator.sendBeacon("/api/end-session", formData);
       }
 
       event.preventDefault();
-      return ''; // For older browsers
+      return ""; // For older browsers
     };
 
     window.addEventListener('beforeunload', handleBeforeUnload);

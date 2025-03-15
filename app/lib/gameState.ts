@@ -4,57 +4,133 @@ import { v4 as uuidv4 } from "uuid";
 import { redis } from "./redis";
 import {
   GameAvailability,
+  GameContainer,
   GameUrlResult,
   SessionResult
 } from "./types";
 import {
-  GAME_STREAMING_URL,
-  NO_ONE_PLAYING,
+  TOTAL_CONTAINERS,
   REDIS_KEYS,
   SESSION_COOKIE_NAME,
   SESSION_TIMEOUT_MS,
-  SOMEONE_PLAYING
 } from "./constants";
 
 /**
- * Initializes the game state in Redis with default values
+ * Initializes the game state in Redis
  * Called when the application starts up
 */
 export async function initializeGameState(): Promise<void> {
-  // Check if IS_PLAYING key exists
-  const isPlaying = await redis.get(REDIS_KEYS.IS_PLAYING);
+  console.log("Initializing game state...");
 
-  // If it doesn't exist, initialize it to "0" (no one playing)
-  if (isPlaying === null) {
-    await redis.set(REDIS_KEYS.IS_PLAYING, NO_ONE_PLAYING);
+  // First check existing user sessions
+  const userSessions = await redis.hgetall(REDIS_KEYS.USER_SESSIONS) || {};
+  const activeSessionCount = Object.keys(userSessions).length;
+  console.log(`Found ${activeSessionCount} active user sessions`);
+
+  // Check to see if we have any containers in Redis.
+  const containers = await redis.hgetall(REDIS_KEYS.CLIENT_CONTAINERS) || {};
+  const existingContainerIds = Object.keys(containers);
+  console.log(`Found ${existingContainerIds.length} existing containers`);
+
+  // Iterate over the total container count and pull the game streaming url from env
+  for (let i = 0; i < TOTAL_CONTAINERS; i++) {
+    const containerUrl = process.env[`GAME_STREAMING_URL_${i}`];
+    if (!containerUrl) {
+      throw new Error(`Missing environment variable for GAME_STREAMING_URL_${i}, or incorrect total container const`);
+    }
+
+    // Check if we have an existing container for this index
+    if (i < existingContainerIds.length) {
+      const existingContainerId = existingContainerIds[i];
+      // Get that container's data
+      const containerData = await redis.hget(REDIS_KEYS.CLIENT_CONTAINERS, existingContainerId) as GameContainer;
+      if (containerData) {
+        try {
+          // Update URL if it changed
+          if (containerData.url !== containerUrl) {
+            console.log(`Updating URL for container ${existingContainerId}`);
+            containerData.url = containerUrl;
+
+            // Update in Redis
+            const containerHashEntry = { [existingContainerId]: JSON.stringify(containerData) };
+            await redis.hset(REDIS_KEYS.CLIENT_CONTAINERS, containerHashEntry);
+          }
+        } catch (error) {
+          console.error(`Error parsing container data for ${existingContainerId}:`, error);
+        }
+      } else {
+        console.error(`Invalid container data for ${existingContainerId}, removing it from Redis`);
+        await redis.hdel(REDIS_KEYS.CLIENT_CONTAINERS, existingContainerId);
+      }
+      // Otherwise make a fresh container reference for this game client
+    } else {
+      const containerId = uuidv4();
+      const newContainer: GameContainer = {
+        id: containerId,
+        url: containerUrl,
+      }
+      const containerHashEntry = { [containerId]: JSON.stringify(newContainer) };
+      await redis.hset(REDIS_KEYS.CLIENT_CONTAINERS, containerHashEntry);
+    }
+
+  }
+  // Check if there are any active containers, if not this will initialize the set
+  const activeContainerIds = await redis.smembers(REDIS_KEYS.ACTIVE_CONTAINER_IDS) || [];
+  // If the set doesn't exist or is empty, that's fine - it starts as an empty set
+  console.log(`Active container set initialized with ${activeContainerIds.length} containers`);
+}
+
+/**
+ * Checks for game sessions that have gone over the alloted demo time (SESSION_TIMEOUT_MS)
+*/
+async function checkAndResetInactiveSessions(): Promise<void> {
+  // Get a list of active containers
+  const activeContainerIds = await redis.smembers(REDIS_KEYS.ACTIVE_CONTAINER_IDS) || [];
+
+  for (const containerId of activeContainerIds) {
+    // Check if the container is still valid
+    const containerData = await redis.hget(REDIS_KEYS.CLIENT_CONTAINERS, containerId) as GameContainer;
+    if (!containerData) {
+      console.log(`Removing invalid container ID: ${containerId}`);
+      await redis.srem(REDIS_KEYS.ACTIVE_CONTAINER_IDS, containerId);
+      continue; // skip to next container
+    }
+
+    const now = Date.now();
+    const containerTimestamp = Number(containerData.lastSessionStart);
+
+    // Check the container's lastSessionStart timestamp to see if it has exceeded the timeout
+    if (now - containerTimestamp > SESSION_TIMEOUT_MS) {
+      console.log(`Container ID ${containerId} has exceeded the timeout, removing it`);
+      await redis.srem(REDIS_KEYS.ACTIVE_CONTAINER_IDS, containerId);
+
+      // Also remove from user session hash map
+      const userSessions = await redis.hgetall(REDIS_KEYS.USER_SESSIONS);
+      if (userSessions) {
+        for (const [sessionId, containerIdForSession] of Object.entries(userSessions)) {
+          if (containerIdForSession === containerId) {
+            await redis.hdel(REDIS_KEYS.USER_SESSIONS, sessionId);
+          }
+        }
+      }
+    }
   }
 }
 
 /**
  * Attempts to start a new game session
- * Uses Redis transactions to ensure only one user can start a session at a time
- * @returns Object indicating if the session was started successfully
+ * Modifies active containers and starts a new user session with that container
 */
 export async function startGameSession(): Promise<SessionResult> {
   await checkAndResetInactiveSessions();
 
   try {
-    const isPlaying = await redis.get(REDIS_KEYS.IS_PLAYING);
-
-    if (isPlaying === SOMEONE_PLAYING) {
-      return { success: false, message: "Game is already in progress" };
-    }
-
-    console.log("Game is available, creating new session");
-    const newSessionId = uuidv4();
-    const currentTime = Date.now();
-
-    console.log("Setting LAST_ACTIVITY to:", currentTime);
-    await redis.set(REDIS_KEYS.IS_PLAYING, SOMEONE_PLAYING);
-    await redis.set(REDIS_KEYS.SESSION_ID, newSessionId);
-    await redis.set(REDIS_KEYS.LAST_ACTIVITY, currentTime);
-    const storedTimestamp = await redis.get(REDIS_KEYS.LAST_ACTIVITY);
-    console.log("Verification - stored LAST_ACTIVITY is:", storedTimestamp);
+    const activeContainerIds = await redis.smembers(REDIS_KEYS.ACTIVE_CONTAINER_IDS) || [];
+    // if the active container ids length are less than the total containers, we can create a new session
+    if (activeContainerIds.length < TOTAL_CONTAINERS) {
+      console.log("A container is available, creating new session");
+      const newSessionId = uuidv4();
+      const currentTime = Date.now();
 
     // Store the session ID in a cookie so the client can prove ownership
     const cookieStore = await cookies();
@@ -65,7 +141,40 @@ export async function startGameSession(): Promise<SessionResult> {
       maxAge: SESSION_TIMEOUT_MS / 1000
     });
 
-    return { success: true }; // Session started successfully
+    // get all the client containers from redis
+    // FOR NOW, ONLY ONE PERSON PER CONTAINER
+    // so we can just use the first available container
+    const clientContainers = await redis.hgetall(REDIS_KEYS.CLIENT_CONTAINERS) || {};
+    const nextAvailableContainerId = Object.keys(clientContainers).find(clientContainerId => {
+      if (!activeContainerIds.includes(clientContainerId)) {
+        return clientContainerId;
+      }
+    });
+    if (!nextAvailableContainerId) {
+      return { success: false, message: "No available game client containers" };
+    }
+    await redis.sadd(REDIS_KEYS.ACTIVE_CONTAINER_IDS, nextAvailableContainerId);
+    // Update the user session with this container id
+    const userSessionHashEntry = { [newSessionId]: nextAvailableContainerId };
+    await redis.hset(REDIS_KEYS.USER_SESSIONS, userSessionHashEntry);
+
+    // update the next avilable container created at time with the current time
+    const containerData = await redis.hget(REDIS_KEYS.CLIENT_CONTAINERS, nextAvailableContainerId) as GameContainer;
+    if (containerData) {
+      try {
+        containerData.lastSessionStart = currentTime;
+        const containerHashEntry = { [nextAvailableContainerId]: JSON.stringify(containerData) };
+        await redis.hset(REDIS_KEYS.CLIENT_CONTAINERS, containerHashEntry);
+      } catch (error) {
+        console.error(`Error parsing container data for ${nextAvailableContainerId}:`, error);
+      }
+    }
+    // otherwise all games are in progress.
+    } else {
+      return { success: false, message: "No available game client containers" };
+    }
+
+    return { success: true, message: "Session started successfully" };
   } catch (error) {
     console.error("Error starting game session:", error);
     return { success: false, message: "Failed to start game session" };
@@ -83,50 +192,25 @@ export async function endGameSession(): Promise<SessionResult> {
     return { success: false, message: "No session cookie found" };
   }
 
-  const storedSessionId = await redis.get(REDIS_KEYS.SESSION_ID);
+  const userSessionContainerId = await redis.hget(REDIS_KEYS.USER_SESSIONS, sessionCookie.value);
 
-  if (!storedSessionId || storedSessionId !== sessionCookie.value) {
+  if (!userSessionContainerId) {
+    (await cookies()).set(SESSION_COOKIE_NAME, "", { maxAge: 0 });
     return { success: false, message: "Invalid session" };
   }
 
-  // Reset the game state in Redis using a transaction
+  // Reset the game state with a transaction:
+  // release the container from active id list, delete the session mapping
   const tx = redis.pipeline();
-  tx.set(REDIS_KEYS.IS_PLAYING, NO_ONE_PLAYING);
-  tx.del(REDIS_KEYS.SESSION_ID);
+  tx.srem(REDIS_KEYS.ACTIVE_CONTAINER_IDS, userSessionContainerId);
+  tx.hdel(REDIS_KEYS.USER_SESSIONS, sessionCookie.value);
   await tx.exec();
+  console.log(`Session ${sessionCookie.value} ended, container ${userSessionContainerId} removed from active list`);
 
   // Clear the session cookie
   (await cookies()).set(SESSION_COOKIE_NAME, "", { maxAge: 0 });
 
-  // Session ended successfully
-  return { success: true };
-}
-
-/**
- * Checks for inactive sessions and resets them if needed
- * This prevents "zombie" sessions where a user left without properly ending
-*/
-async function checkAndResetInactiveSessions(): Promise<void> {
-  const isPlaying = await redis.get(REDIS_KEYS.IS_PLAYING);
-  console.log("Checking for inactive sessions, isPlaying:", isPlaying);
-
-  // Only check for timeout if someone is currently playing
-  if (isPlaying === SOMEONE_PLAYING) {
-    // Get the timestamp of the last activity
-    const lastActivityMs = await redis.get(REDIS_KEYS.LAST_ACTIVITY);
-    const lastActivity = lastActivityMs? Number(lastActivityMs) : Date.now();
-
-    const now = Date.now();
-
-    // If the last activity was more than 5 minutes ago, reset the session
-    if (now - lastActivity > SESSION_TIMEOUT_MS) {
-      console.log("Game session reset due to inactivity");
-
-      // Reset the game state in Redis
-      await redis.set(REDIS_KEYS.IS_PLAYING, NO_ONE_PLAYING);
-      await redis.del(REDIS_KEYS.SESSION_ID);
-    }
-  }
+  return { success: true, message: "Session ended successfully" };
 }
 
 /**
@@ -135,10 +219,14 @@ async function checkAndResetInactiveSessions(): Promise<void> {
 */
 export async function getGameAvailability(): Promise<GameAvailability> {
   await checkAndResetInactiveSessions();
-  const isPlaying = await redis.get(REDIS_KEYS.IS_PLAYING);
 
-  // Game is available if no one is playing
-  return { isAvailable: isPlaying !== SOMEONE_PLAYING };
+  const activeContainerIds = await redis.smembers(REDIS_KEYS.ACTIVE_CONTAINER_IDS) || [];
+
+  return {
+    isAvailable: activeContainerIds.length < TOTAL_CONTAINERS,
+    activeContainers: activeContainerIds.length,
+    totalContainers: TOTAL_CONTAINERS
+  };
 }
 
 /**
@@ -154,62 +242,25 @@ export async function getGameUrl(): Promise<GameUrlResult> {
     return { success: false, message: "No session cookie found" };
   }
 
-  // Get the current state from Redis
-  const [isPlaying, storedSessionId] = await Promise.all([
-    redis.get(REDIS_KEYS.IS_PLAYING),
-    redis.get(REDIS_KEYS.SESSION_ID)
-  ]);
-
-  // Validate that:
-  // 1. Someone is playing
-  // 2. There is a stored session ID
-  // 3. The stored session ID matches the one in the cookie
-  if (
-    isPlaying !== SOMEONE_PLAYING ||
-    !storedSessionId ||
-    storedSessionId !== sessionCookie.value
-  ) {
-    return { success: false, message: "No valid game session" };
+  // get the user sessions based on session cookie value
+  const userSessionContainerId = await redis.hget(REDIS_KEYS.USER_SESSIONS, sessionCookie.value);
+  if (!userSessionContainerId) {
+    (await cookies()).set(SESSION_COOKIE_NAME, "", { maxAge: 0 });
+    return { success: false, message: "Invalid session" };
   }
 
-  // Update the last activity timestamp
-  await redis.set(REDIS_KEYS.LAST_ACTIVITY, Date.now());
+  // get the associated game client container by its id
+  const containerId = userSessionContainerId.toString();
+  const clientContainer = await redis.hget(REDIS_KEYS.CLIENT_CONTAINERS, containerId) as GameContainer;
 
-  // Return the actual game streaming URL
-  return {
-    success: true,
-    url: GAME_STREAMING_URL
-  };
-}
-
-/**
- * Updates the activity timestamp for the current session
- * This keeps the session alive during active gameplay
- * @returns Object indicating if the timestamp was updated successfully
-*/
-export async function updateActivityTimestamp(): Promise<SessionResult> {
-  const sessionCookie = (await cookies()).get(SESSION_COOKIE_NAME);
-
-  if (!sessionCookie) {
-    return { success: false, message: "No session cookie found" };
+  if (clientContainer) {
+    return {
+      success: true,
+      url: clientContainer.url,
+      containerId: containerId
+    }
+  } else {
+    (await cookies()).set(SESSION_COOKIE_NAME, "", { maxAge: 0 });
+    return { success: false, message: "Invalid container ID" };
   }
-
-  // Get the current state from Redis
-  const [isPlaying, storedSessionId] = await Promise.all([
-    redis.get(REDIS_KEYS.IS_PLAYING),
-    redis.get(REDIS_KEYS.SESSION_ID)
-  ]);
-
-  // Validate the session
-  if (
-    isPlaying !== SOMEONE_PLAYING ||
-    !storedSessionId ||
-    storedSessionId !== sessionCookie.value
-  ) {
-    return { success: false };
-  }
-
-  // Update the last activity timestamp
-  await redis.set(REDIS_KEYS.LAST_ACTIVITY, Date.now());
-  return { success: true };
 }

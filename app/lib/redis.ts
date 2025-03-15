@@ -1,7 +1,6 @@
 import { Redis } from "@upstash/redis";
 import { RedisConfig } from "./types/redis.types";
 
-// Make sure Redis config has env variables properly set
 const getRedisConfig = (): RedisConfig => {
   if (!process.env.REDIS_URL) {
     throw new Error("REDIS_URL environment variable is not defined");
