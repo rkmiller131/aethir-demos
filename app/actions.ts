@@ -2,12 +2,12 @@
 
 import { redirect } from "next/navigation";
 import {
-  getGameAvailability,
+  getSessionValidity,
   startGameSession,
   endGameSession,
-  updateActivityTimestamp,
   getGameUrl,
-  initializeGameState
+  initializeGameState,
+  endAllGameSessions
 } from "@/app/lib/gameState";
 import { cookies } from "next/headers";
 
@@ -15,11 +15,11 @@ import { cookies } from "next/headers";
 initializeGameState().catch(console.error);
 
 /**
- * Server action to check if the game is available
- * This is called by the PlayNowButton component
+ * Server action to check if the session is valid
+ * This is polled by the play page
 */
-export async function checkGameAvailability() {
-  return getGameAvailability();
+export async function checkGameSessionValidity() {
+  return getSessionValidity();
 }
 
 /**
@@ -46,19 +46,11 @@ export async function endGame() {
 }
 
 /**
- * Used to manually end the game session without redirecting;
+ * Used to manually abort all active game sessions.
  * Does not redirect to the password screen
  */
-export async function endGameInPlace() {
-  await endGameSession();
-}
-
-/**
- * Server action to update the activity timestamp
- * Called periodically while playing to keep the session alive
-*/
-export async function heartbeat() {
-  return updateActivityTimestamp();
+export async function endGamesInPlace() {
+  await endAllGameSessions();
 }
 
 /**

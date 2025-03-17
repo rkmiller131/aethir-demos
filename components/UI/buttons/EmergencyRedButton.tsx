@@ -1,11 +1,11 @@
 "use client";
 
-import { endGameInPlace } from "@/app/actions";
+import { endGamesInPlace } from "@/app/actions";
 import Image from "next/image";
 
 export default function EmergencyRedButton() {
   const handleStopGame = async () => {
-    await endGameInPlace();
+    await endGamesInPlace();
   }
   return (
     <button

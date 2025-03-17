@@ -1,23 +1,12 @@
 /**
  * Redis key constants
- * These are the keys we use to store game state in Redis
+ * https://redis.io/docs/latest/develop/use/keyspace/
  */
 export const REDIS_KEYS = {
   /**
-   * Stores whether someone is currently playing (value: "0" or "1")
+   * Stores a hash map of user session Ids and their joined timestamps
+   * [uuid4]: timestamp
+   * @example { "123e4567-e89b-12d3-a456-426614174000": 1690000000000 }
   */
-  IS_PLAYING: "game:is_playing", // "game:" is a prefix naming convention to namespace the keys
-
-  /**
-   * Stores the current session ID for the active player (value: UUID string)
-  */
-  SESSION_ID: "game:session_id",
-
-  /**
-   * Stores the timestamp of the last activity from the player (value: timestamp number)
-  */
-  LAST_ACTIVITY: "game:last_activity",
+  ACTIVE_SESSIONS: "game:active_sessions",
 };
-
-export const SOMEONE_PLAYING = 1;
-export const NO_ONE_PLAYING = 0;
