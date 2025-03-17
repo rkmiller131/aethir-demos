@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from 'next/navigation';
 import NetflixStinger from "@/app/netflix/(components)/NetflixStinger";
-import { checkGameAvailability, endGame, getGameStreamUrl } from "../actions";
+import { checkGameSessionValidity, endGame, getGameStreamUrl } from "../actions";
 
 
 export default function Play() {
@@ -40,10 +40,10 @@ export default function Play() {
       loadGameUrl();
     }
 
-    const checkAvailability = async () => {
+    const checkSessionValidity = async () => {
       try {
-        const result = await checkGameAvailability();
-        if (result.isAvailable) {
+        const result = await checkGameSessionValidity();
+        if (!result.isValid) {
           setTimeoutAlert(true);
           await endGame();
           setTimeout(() => {
@@ -51,13 +51,13 @@ export default function Play() {
           }, 3000);
         }
       } catch (error) {
-        console.error("Error checking game availability:", error);
+        console.error("Error checking game session validity:", error);
       }
     };
 
     // every 10 sec test for timeout
     const intervalId = setInterval(() => {
-      checkAvailability();
+      checkSessionValidity();
     }, 10000);
 
     // Handle tab closing/refreshing
@@ -65,19 +65,20 @@ export default function Play() {
       if (navigator.sendBeacon) {
         // Create a FormData object to send
         const formData = new FormData();
-        navigator.sendBeacon('/api/end-session', formData);
+        navigator.sendBeacon("/api/end-session", formData);
       }
 
       event.preventDefault();
-      return ''; // For older browsers
+      return ""; // For older browsers
     };
 
-    window.addEventListener('beforeunload', handleBeforeUnload);
+    window.addEventListener("beforeunload", handleBeforeUnload);
 
     return () => {
       clearInterval(intervalId);
-      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener("beforeunload", handleBeforeUnload);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stingerEnded]);
 
   if (!stingerEnded) {
