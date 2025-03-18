@@ -62,9 +62,12 @@ export default function BannerMovie() {
         autoPlay
         muted
         loop
+        playsInline
+        preload="auto"
         className="h-full w-full object-cover z-[-1]"
       >
-        <source src="https://cdn.glitch.me/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/banner-movie.mp4?v=1741788746068" type="video/mp4" />
+        <source src="https://cdn.glitch.me/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/banner-trailer.webm?v=1742318229191" type="video/webm" />
+        Your browser does not support the video tag.
       </video>
       {/* Bottom Blend Gradient */}
       <div className="absolute left-0 right-0 top-auto bottom-[-1px] w-full h-[14.7vw] z-0 bg-gradient-to-b from-[hsla(0,0%,8%,0)] via-[hsla(0,0%,8%,0.15)_15%] via-[hsla(0,0%,8%,0.35)_29%] via-[hsla(0,0%,8%,0.58)_44%] via-[#141414_68%] to-[#141414] bg-[length:100%_100%] bg-[repeat:repeat-x] bg-[position:0_top] opacity-100"></div>
