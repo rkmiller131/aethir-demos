@@ -11,7 +11,7 @@ export default function Netflix() {
     <main className="flex flex-col text-white font-sans">
       <NavMock />
       <BannerMovie />
-      <div className="mt-[-5%] pb-[5%] relative flex flex-col gap-5 lg:gap-20 justify-evenly pl-5 lg:pl-20">
+      <div className="mt-[-4%] pb-[5%] relative flex flex-col gap-5 lg:gap-20 justify-evenly pl-5 lg:pl-20">
           <MovieCarouselMock movieList={movieRow1} header="Your Next Watch" />
           <MovieCarouselMock movieList={movieRow2} header="Top Searches" />
       </div>
