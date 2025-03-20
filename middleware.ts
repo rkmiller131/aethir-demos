@@ -22,10 +22,21 @@ export async function middleware(request: NextRequest) {
     }
   }
 
+  if (request.nextUrl.pathname.startsWith("/landing")) {
+    const authToken = request.cookies.get("auth")?.value;
+    const isAuthenticated = !!authToken;
+
+    if (!isAuthenticated) {
+      return NextResponse.redirect(new URL("/", request.url));
+    }
+  }
+
   return NextResponse.next();
 }
 
+
+
 // Paths this middleware applies to
 export const config = {
-  matcher: ["/netflix/:path*", "/play/:path*"],
+  matcher: ["/netflix/:path*", "/play/:path*", "/landing/:path*"],
 };
