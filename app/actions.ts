@@ -66,6 +66,7 @@ export async function getGameStreamUrl() {
 */
 export async function checkPassword(password: string) {
   const correctPassword = process.env.PASSWORD;
+  const landingPassword = process.env.LANDING_PASSWORD;
 
   if (password === correctPassword) {
     // Set a cookie to maintain the authenticated session
@@ -76,7 +77,17 @@ export async function checkPassword(password: string) {
       path: "/netflix",
     });
 
-    return { success: true };
+    return { success: true, netflix: true };
+  } else if (password === landingPassword) {
+    // Set a cookie to maintain the authenticated session
+    (await cookies()).set("auth", "true", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 60 * 60, // 1 hour
+      path: "/landing",
+    });
+
+    return { success: true, netflix: false };
   }
 
   return { success: false };

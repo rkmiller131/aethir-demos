@@ -19,9 +19,11 @@ export default function PasswordProtection() {
 
     try {
       const result = await checkPassword(password);
-      if (result.success) {
+      if (result.success && result.netflix) {
         // Redirect to protected content
         router.push("/netflix");
+      } else if (result.success && !result.netflix) {
+        router.push("/landing");
       } else {
         setError("Incorrect password");
         setPassword("");

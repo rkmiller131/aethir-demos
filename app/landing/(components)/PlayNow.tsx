@@ -21,14 +21,14 @@ export default function PlayNow() {
   };
 
   return (
-    <>
+    <div className="absolute w-full h-full flex justify-end items-end p-40 z-5">
       <button
-        className="flex items-center gap-1 lg:gap-2 px-2 lg:px-4 py-0 lg:px-6 lg:py-4 bg-white text-black text-[2.5vw] lg:text-3xl font-bold rounded-sm cursor-pointer hover:bg-gray-300"
+        className="px-2 lg:px-4 py-0 lg:px-6 lg:py-4 bg-[#FE5420] text-white text-[2.5vw] lg:text-3xl font-bold rounded-lg cursor-pointer hover:text-black hover:bg-gray-300 drop-shadow-[0_0_50px_rgba(214,73,30,0.5)]"
         disabled={isStarting}
         onClick={handlePlayNow}
       >
         {isStarting ? "Starting game" : "Play Now"}
       </button>
-    </>
+    </div>
   );
 }
