@@ -26,11 +26,13 @@ export async function checkGameSessionValidity() {
  * Server action to start a game session
  * Redirects to the game page if successful
 */
-export async function startGame() {
+export async function startGame(page: string) {
   const result = await startGameSession();
 
-  if (result.success) {
+  if (result.success && page === "netflix") {
     redirect("/play");
+  } else if (result.success && page === "landing") {
+    redirect("/play/1");
   }
 
   return result;
@@ -65,29 +67,23 @@ export async function getGameStreamUrl() {
  * Simple plain text password check
 */
 export async function checkPassword(password: string) {
-  const correctPassword = process.env.PASSWORD;
+  const netflixPassword = process.env.NETFLIX_PASSWORD;
   const landingPassword = process.env.LANDING_PASSWORD;
 
-  if (password === correctPassword) {
+  if (
+    password === netflixPassword ||
+    password === landingPassword
+  ) {
+    const page = password === netflixPassword ? "/netflix" : "/landing";
     // Set a cookie to maintain the authenticated session
     (await cookies()).set("auth", "true", {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       maxAge: 60 * 60, // 1 hour
-      path: "/netflix",
+      path: page,
     });
 
-    return { success: true, netflix: true };
-  } else if (password === landingPassword) {
-    // Set a cookie to maintain the authenticated session
-    (await cookies()).set("auth", "true", {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      maxAge: 60 * 60, // 1 hour
-      path: "/landing",
-    });
-
-    return { success: true, netflix: false };
+    return { success: true, page: page };
   }
 
   return { success: false };

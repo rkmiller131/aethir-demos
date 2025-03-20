@@ -13,7 +13,7 @@ export default function PlayNowButton() {
     try {
       setIsStarting(true);
       // This will redirect to /play if successful
-      await startGame();
+      await startGame("netflix");
     } catch (error) {
       console.error("Error starting game:", error);
     } finally {

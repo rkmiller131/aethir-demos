@@ -4,8 +4,7 @@ import { FormEvent, useState } from "react";
 import { checkPassword } from "@/app/actions";
 import { useRouter } from "next/navigation";
 
-// NOTE - could reuse this password protection to route
-// to other branded pages based on the password entered
+// Routes to a landing page based on the password entered
 export default function PasswordProtection() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -19,11 +18,9 @@ export default function PasswordProtection() {
 
     try {
       const result = await checkPassword(password);
-      if (result.success && result.netflix) {
+      if (result.success && result.page) {
         // Redirect to protected content
-        router.push("/netflix");
-      } else if (result.success && !result.netflix) {
-        router.push("/landing");
+        router.push(result.page);
       } else {
         setError("Incorrect password");
         setPassword("");
