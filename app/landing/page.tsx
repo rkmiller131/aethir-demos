@@ -1,6 +1,9 @@
+import PlayNow from "./(components)/PlayNow";
+
 export default function Landing() {
   return (
     <div className="w-[100dvw] h-[100dvh]">
+      <PlayNow />
       <video
         autoPlay
         muted
