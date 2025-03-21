@@ -11,7 +11,7 @@ export default function PlayNow() {
 
     try {
       setIsStarting(true);
-      // This will redirect to /play/1 if successful
+      // This will redirect to /play/0 if successful
       await startGame("landing");
     } catch (error) {
       console.error("Error starting game:", error);

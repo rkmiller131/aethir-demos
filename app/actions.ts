@@ -29,9 +29,9 @@ export async function checkGameSessionValidity() {
 export async function startGame(page: string) {
   const result = await startGameSession();
 
-  if (result.success && page === "netflix") {
-    redirect("/play");
-  } else if (result.success && page === "landing") {
+  if (result.success && page === "landing") {
+    redirect("/play/0");
+  } else if (result.success && page === "netflix") {
     redirect("/play/1");
   }
 
@@ -42,9 +42,9 @@ export async function startGame(page: string) {
  * Server action to end a game session
  * Called when the player hits the back button on the play page.
  */
-export async function endGame() {
+export async function endGame(route: string) {
   await endGameSession();
-  redirect("/");
+  redirect(route);
 }
 
 /**

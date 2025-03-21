@@ -11,4 +11,4 @@ export const SESSION_COOKIE_NAME = "game_session";
 /**
  * URL to the Aethir stream, kept private on the server
 */
-export const GAME_STREAMING_URL = process.env.GAME_STREAMING_URL as string;
+export const AETHIR_URL = process.env.AETHIR_URL as string;

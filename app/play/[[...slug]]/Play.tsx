@@ -10,7 +10,7 @@ export default function Play({ slug }: { slug: number | null }) {
   const [stingerEnded, setStingerEnded] = useState(false);
   const [timeoutAlert, setTimeoutAlert] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const route = slug === 1 ? "/landing" : "/netflix";
+  const route = slug === 0 ? "/landing" : "/netflix";
 
   const loadGameUrl = async () => {
     try {
@@ -27,10 +27,10 @@ export default function Play({ slug }: { slug: number | null }) {
   }
 
   const handleBack = async () => {
-    await endGame();
+    await endGame(route);
   }
 
-  const handleStingerEnd = ():void => {
+  const handleStingerEnd = (): void => {
     setStingerEnded(true);
     sessionStorage.setItem("hasStingerPlayed", "true");
   };
@@ -45,7 +45,7 @@ export default function Play({ slug }: { slug: number | null }) {
         const result = await checkGameSessionValidity();
         if (!result.isValid) {
           setTimeoutAlert(true);
-          await endGame();
+          await endGame(route);
           setTimeout(() => {
             router.push(route);
           }, 3000);
@@ -82,8 +82,12 @@ export default function Play({ slug }: { slug: number | null }) {
   }, [stingerEnded]);
 
   if (!stingerEnded) {
-    // return <NetflixStinger onEnd={handleStingerEnd} />;
-    return <Stinger onEnd={handleStingerEnd} version={slug}/>;
+    if (slug === 0) {
+      handleStingerEnd();
+      return null;
+    } else {
+      return <Stinger onEnd={handleStingerEnd} version={slug}/>;
+    }
   }
 
   return (

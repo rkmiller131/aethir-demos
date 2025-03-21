@@ -9,7 +9,7 @@ import {
   SessionValidityResult
 } from "./types";
 import {
-  GAME_STREAMING_URL,
+  AETHIR_URL,
   REDIS_KEYS,
   SESSION_COOKIE_NAME,
   SESSION_TIMEOUT_MS,
@@ -183,6 +183,6 @@ export async function getGameUrl(): Promise<GameUrlResult> {
   // Return the actual game streaming URL (can support up to 8 concurrent users at time of GDC 2025)
   return {
     success: true,
-    url: GAME_STREAMING_URL
+    url: AETHIR_URL
   };
 }
