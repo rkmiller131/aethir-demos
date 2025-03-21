@@ -2,15 +2,15 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from 'next/navigation';
-import NetflixStinger from "@/app/netflix/(components)/NetflixStinger";
-import { checkGameSessionValidity, endGame, getGameStreamUrl } from "../actions";
+import { checkGameSessionValidity, endGame, getGameStreamUrl } from "@/app/actions";
+import Stinger from "@/components/Stinger";
 
-
-export default function Play() {
+export default function Play({ slug }: { slug: number | null }) {
   const router = useRouter();
   const [stingerEnded, setStingerEnded] = useState(false);
   const [timeoutAlert, setTimeoutAlert] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const route = slug === 0 ? "/landing" : "/netflix";
 
   const loadGameUrl = async () => {
     try {
@@ -21,16 +21,16 @@ export default function Play() {
     } catch (error) {
       console.error("Error loading game URL:", error);
       setTimeout(() => {
-        router.push("/netflix");
+        router.push(route);
       }, 2000);
     }
   }
 
   const handleBack = async () => {
-    await endGame();
+    await endGame(route);
   }
 
-  const handleStingerEnd = ():void => {
+  const handleStingerEnd = (): void => {
     setStingerEnded(true);
     sessionStorage.setItem("hasStingerPlayed", "true");
   };
@@ -45,9 +45,9 @@ export default function Play() {
         const result = await checkGameSessionValidity();
         if (!result.isValid) {
           setTimeoutAlert(true);
-          await endGame();
+          await endGame(route);
           setTimeout(() => {
-            router.push("/netflix");
+            router.push(route);
           }, 3000);
         }
       } catch (error) {
@@ -82,7 +82,12 @@ export default function Play() {
   }, [stingerEnded]);
 
   if (!stingerEnded) {
-    return <NetflixStinger onEnd={handleStingerEnd} />;
+    if (slug === 0) {
+      handleStingerEnd();
+      return null;
+    } else {
+      return <Stinger onEnd={handleStingerEnd} version={slug}/>;
+    }
   }
 
   return (
