@@ -14,7 +14,6 @@ export default function PlayNowButton() {
 
     try {
       setIsStarting(true);
-      // This will redirect to /play if successful
       await startGame(APP_PAGES.GAMEPASS as AppPageType);
     } catch (error) {
       console.error('Error starting game:', error);
@@ -26,7 +25,7 @@ export default function PlayNowButton() {
   return (
     <>
       <button
-        className="flex items-center gap-1 lg:gap-2 px-2 lg:px-4 py-0 lg:px-6 lg:py-4 bg-white text-black text-[2.5vw] lg:text-3xl font-bold rounded-sm cursor-pointer hover:bg-gray-300"
+        className="flex items-center max-h-[120px] gap-1 lg:gap-2 px-2 lg:px-4 py-0 lg:py-4 bg-white text-black text-[2.5vw] lg:text-3xl font-bold rounded-sm cursor-pointer hover:bg-gray-300"
         disabled={isStarting}
         onClick={handlePlayNow}
       >

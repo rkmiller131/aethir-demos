@@ -105,8 +105,11 @@ export default function Play({ slug }: { slug: number | null }) {
     if (slug === 0) {
       handleStingerEnd();
       return null;
-    } else {
+    } else if (slug === 1) {
       return <Stinger onEnd={handleStingerEnd} version={slug} />;
+    } else if (slug === 2) {
+      handleStingerEnd();
+      return null;
     }
   }
 
