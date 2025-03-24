@@ -1,18 +1,36 @@
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { checkGameSessionValidity, endGame, getGameStreamUrl } from "@/app/actions";
-import Stinger from "@/components/Stinger";
-import { APP_PAGES } from "@/app/lib/constants";
-import { AppPageType } from "@/app/lib/types";
+import {
+  checkGameSessionValidity,
+  endGame,
+  getGameStreamUrl,
+} from '@/app/actions';
+import Stinger from '@/components/Stinger';
+import { APP_PAGES } from '@/app/lib/constants';
+import { AppPageType } from '@/app/lib/types';
 
 export default function Play({ slug }: { slug: number | null }) {
   const router = useRouter();
   const [stingerEnded, setStingerEnded] = useState(false);
   const [timeoutAlert, setTimeoutAlert] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const route = slug === 0 ? APP_PAGES.LANDING : APP_PAGES.NETFLIX;
+  let route;
+
+  switch (slug) {
+    case 0:
+      route = APP_PAGES.LANDING;
+      break;
+    case 1:
+      route = APP_PAGES.NETFLIX;
+      break;
+    case 2:
+      route = APP_PAGES.GAMEPASS;
+      break;
+    default:
+      route = APP_PAGES.LANDING;
+  }
 
   const loadGameUrl = async () => {
     try {
@@ -21,20 +39,20 @@ export default function Play({ slug }: { slug: number | null }) {
         iframeRef.current.src = result.url;
       }
     } catch (error) {
-      console.error("Error loading game URL:", error);
+      console.error('Error loading game URL:', error);
       setTimeout(() => {
         router.push(route);
       }, 2000);
     }
-  }
+  };
 
   const handleBack = async () => {
     await endGame(route as AppPageType);
-  }
+  };
 
   const handleStingerEnd = (): void => {
     setStingerEnded(true);
-    sessionStorage.setItem("hasStingerPlayed", "true");
+    sessionStorage.setItem('hasStingerPlayed', 'true');
   };
 
   useEffect(() => {
@@ -53,7 +71,7 @@ export default function Play({ slug }: { slug: number | null }) {
           }, 3000);
         }
       } catch (error) {
-        console.error("Error checking game session validity:", error);
+        console.error('Error checking game session validity:', error);
       }
     };
 
@@ -67,20 +85,20 @@ export default function Play({ slug }: { slug: number | null }) {
       if (navigator.sendBeacon) {
         // Create a FormData object to send
         const formData = new FormData();
-        navigator.sendBeacon("/api/end-session", formData);
+        navigator.sendBeacon('/api/end-session', formData);
       }
 
       event.preventDefault();
-      return ""; // For older browsers
+      return ''; // For older browsers
     };
 
-    window.addEventListener("beforeunload", handleBeforeUnload);
+    window.addEventListener('beforeunload', handleBeforeUnload);
 
     return () => {
       clearInterval(intervalId);
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stingerEnded]);
 
   if (!stingerEnded) {
@@ -88,7 +106,7 @@ export default function Play({ slug }: { slug: number | null }) {
       handleStingerEnd();
       return null;
     } else {
-      return <Stinger onEnd={handleStingerEnd} version={slug}/>;
+      return <Stinger onEnd={handleStingerEnd} version={slug} />;
     }
   }
 
@@ -100,7 +118,11 @@ export default function Play({ slug }: { slug: number | null }) {
       >
         &#8592; <span className="underline">Exit Stream</span>
       </button>
-      <span className={`${timeoutAlert ? "block" : "hidden"} absolute z-20 text-3xl left-[40%] top-[40%] text-white`}>
+      <span
+        className={`${
+          timeoutAlert ? 'block' : 'hidden'
+        } absolute z-20 text-3xl left-[40%] top-[40%] text-white`}
+      >
         SESSION TIMEOUT
       </span>
       <iframe
