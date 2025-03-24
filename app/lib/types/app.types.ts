@@ -1,0 +1,1 @@
+export type AppPageType = "/netflix" | "/landing" | "/gamepass";

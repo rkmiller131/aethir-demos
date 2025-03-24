@@ -4,13 +4,15 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from 'next/navigation';
 import { checkGameSessionValidity, endGame, getGameStreamUrl } from "@/app/actions";
 import Stinger from "@/components/Stinger";
+import { APP_PAGES } from "@/app/lib/constants";
+import { AppPageType } from "@/app/lib/types";
 
 export default function Play({ slug }: { slug: number | null }) {
   const router = useRouter();
   const [stingerEnded, setStingerEnded] = useState(false);
   const [timeoutAlert, setTimeoutAlert] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const route = slug === 0 ? "/landing" : "/netflix";
+  const route = slug === 0 ? APP_PAGES.LANDING : APP_PAGES.NETFLIX;
 
   const loadGameUrl = async () => {
     try {
@@ -27,7 +29,7 @@ export default function Play({ slug }: { slug: number | null }) {
   }
 
   const handleBack = async () => {
-    await endGame(route);
+    await endGame(route as AppPageType);
   }
 
   const handleStingerEnd = (): void => {
@@ -45,7 +47,7 @@ export default function Play({ slug }: { slug: number | null }) {
         const result = await checkGameSessionValidity();
         if (!result.isValid) {
           setTimeoutAlert(true);
-          await endGame(route);
+          await endGame(route as AppPageType);
           setTimeout(() => {
             router.push(route);
           }, 3000);
