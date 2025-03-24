@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { startGame } from "@/app/actions";
 import { APP_PAGES } from "@/app/lib/constants";
+import { AppPageType } from "@/app/lib/types";
 
 export default function PlayNow() {
   const [isStarting, setIsStarting] = useState(false);
@@ -13,7 +14,7 @@ export default function PlayNow() {
     try {
       setIsStarting(true);
       // This will redirect to /play/0 if successful
-      await startGame(APP_PAGES.LANDING);
+      await startGame(APP_PAGES.LANDING as AppPageType);
     } catch (error) {
       console.error("Error starting game:", error);
     } finally {
