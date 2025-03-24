@@ -10,6 +10,8 @@ import {
   endAllGameSessions
 } from "@/app/lib/gameState";
 import { cookies } from "next/headers";
+import { APP_PAGES } from "./lib/constants";
+import { AppPageType } from "./lib/types";
 
 // Initialize game state on app startup
 initializeGameState().catch(console.error);
@@ -26,12 +28,12 @@ export async function checkGameSessionValidity() {
  * Server action to start a game session
  * Redirects to the game page if successful
 */
-export async function startGame(page: string) {
+export async function startGame(page: AppPageType) {
   const result = await startGameSession();
 
-  if (result.success && page === "landing") {
+  if (result.success && page === APP_PAGES.LANDING) {
     redirect("/play/0");
-  } else if (result.success && page === "netflix") {
+  } else if (result.success && page === APP_PAGES.NETFLIX) {
     redirect("/play/1");
   }
 
@@ -42,9 +44,9 @@ export async function startGame(page: string) {
  * Server action to end a game session
  * Called when the player hits the back button on the play page.
  */
-export async function endGame(route: string) {
+export async function endGame(page: AppPageType) {
   await endGameSession();
-  redirect(route);
+  redirect(page);
 }
 
 /**
@@ -69,12 +71,17 @@ export async function getGameStreamUrl() {
 export async function checkPassword(password: string) {
   const netflixPassword = process.env.NETFLIX_PASSWORD;
   const landingPassword = process.env.LANDING_PASSWORD;
+  const gamepassPassword = process.env.GAMEPASS_PASSWORD;
 
   if (
     password === netflixPassword ||
-    password === landingPassword
+    password === landingPassword ||
+    password === gamepassPassword
   ) {
-    const page = password === netflixPassword ? "/netflix" : "/landing";
+    const page =
+      password === netflixPassword ? APP_PAGES.NETFLIX :
+      password === landingPassword ? APP_PAGES.LANDING :
+      APP_PAGES.GAMEPASS;
     // Set a cookie to maintain the authenticated session
     (await cookies()).set("auth", "true", {
       httpOnly: true,

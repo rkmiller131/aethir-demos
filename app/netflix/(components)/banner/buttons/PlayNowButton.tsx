@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { startGame } from "@/app/actions";
+import { APP_PAGES } from "@/app/lib/constants";
 
 export default function PlayNowButton() {
   const [isStarting, setIsStarting] = useState(false);
@@ -13,7 +14,7 @@ export default function PlayNowButton() {
     try {
       setIsStarting(true);
       // This will redirect to /play if successful
-      await startGame("netflix");
+      await startGame(APP_PAGES.NETFLIX);
     } catch (error) {
       console.error("Error starting game:", error);
     } finally {
