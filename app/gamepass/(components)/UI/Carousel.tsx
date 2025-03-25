@@ -47,7 +47,7 @@ export default function Carousel() {
                 ? 'hover:bg-gray-700'
                 : 'opacity-50 cursor-not-allowed'
             }`}
-            disabled={startIndex === 0}
+            disabled={true}
           >
             <ChevronLeft className="w-5 h-5" color="gray" />
           </button>
@@ -58,17 +58,17 @@ export default function Carousel() {
                 ? 'hover:bg-gray-700'
                 : 'opacity-50 cursor-not-allowed'
             }`}
-            disabled={startIndex + visibleCount >= games.length}
+            disabled={true}
           >
             <ChevronRight className="w-5 h-5" color="gray" />
           </button>
         </div>
       </div>
       <div className="flex gap-4 overflow-hidden">
-        {games.slice(startIndex, startIndex + visibleCount).map((item, i) => (
+        {games.slice(0, 6).map((item, i) => (
           <div
             key={i}
-            className="flex-shrink-0 w-48 h-[350px] bg-gray-800 rounded-lg overflow-hidden flex flex-col"
+            className="flex-shrink-0 w-48 h-[350px] bg-gray-800 rounded-lg overflow-hidden flex flex-col hover:brightness-75 transition"
           >
             <div className="relative flex-grow">
               <Image
