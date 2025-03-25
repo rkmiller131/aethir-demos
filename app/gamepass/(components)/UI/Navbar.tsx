@@ -17,7 +17,6 @@ import {
 
 export default function Navbar() {
   const [active, setActive] = useState(true);
-  const [game, setGame] = useState('');
 
   return (
     <div
@@ -80,7 +79,7 @@ export default function Navbar() {
           <div className="mb-2">
             <select
               className="my-2 block w-full p-2 rounded-lg bg-gray-800/50 cursor-pointer"
-              value={game}
+              value={1}
               onChange={(e) => console.log(e.target.value)}
             >
               <option value={1}>Action</option>

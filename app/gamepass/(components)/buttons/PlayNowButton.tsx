@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { useState } from 'react';
 import { startGame } from '@/app/actions';
 import { APP_PAGES } from '@/app/lib/constants';
