@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { startGame } from '@/app/actions';
 import { APP_PAGES } from '@/app/lib/constants';
 import { AppPageType } from '@/app/lib/types';
+import { Loader, Play } from 'lucide-react';
 
 export default function PlayNowButton() {
   const [isStarting, setIsStarting] = useState(false);
@@ -25,18 +26,20 @@ export default function PlayNowButton() {
   return (
     <>
       <button
-        className="flex items-center max-h-[120px] gap-1 lg:gap-2 px-2 lg:px-4 py-0 lg:py-4 bg-white text-black text-[2.5vw] lg:text-3xl font-bold rounded-sm cursor-pointer hover:bg-gray-300"
+        className="flex items-center max-h-[120px] gap-1 lg:gap-2 px-2 lg:px-4 py-0 lg:py-4 bg-gray-500/75 text-[2.5vw] lg:text-3xl font-bold rounded-sm cursor-pointer"
         disabled={isStarting}
         onClick={handlePlayNow}
       >
-        <Image
-          src="/play-icon.svg"
-          alt="play icon"
-          height={30}
-          width={30}
-          className="h-[10px] sm:h-[15px] lg:h-[30px] w-auto"
-        />
-        {isStarting ? 'Starting game' : 'Play Now'}
+        {isStarting ? (
+          <Loader
+            height={15}
+            width={15}
+            color="white"
+            className={`animate-spin ${isStarting ? 'spin' : ''}`}
+          />
+        ) : (
+          <Play height={15} width={15} color="white" />
+        )}
       </button>
     </>
   );

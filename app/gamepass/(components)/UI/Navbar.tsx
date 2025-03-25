@@ -23,7 +23,7 @@ export default function Navbar() {
     <div
       className={
         active
-          ? 'flex flex-col w-[225px] min-h-screen p-2 bg-black'
+          ? 'flex flex-col min-w-[225px] min-h-screen p-2 bg-black'
           : 'flex flex-col min-h-screen p-2 bg-black'
       }
     >
@@ -31,7 +31,7 @@ export default function Navbar() {
         <>
           <div className="flex flex-row mb-4">
             <Image
-              src={games.at(1)!.portrait}
+              src={games.at(0)!.portrait}
               width={32}
               height={32}
               alt="profile"
@@ -85,55 +85,33 @@ export default function Navbar() {
             >
               <option value={1}>Action</option>
               <option value={2}>RPG</option>
-              <option value={3}>Racing</option>
+              <option value={3}>FPS</option>
+              <option value={4}>Sports</option>
             </select>
           </div>
           <div className="flex flex-col space-y-2">
-            <div className="flex flex-row bg-gray-800/50 rounded-md p-2 items-center cursor-pointer">
-              <Image
-                src={games.at(1)!.portrait}
-                width={48}
-                height={48}
-                alt="profile"
-                className="w-[48px] h-[48px] rounded-md object-cover"
-              />
-              <div className="flex flex-col items-left w-full px-2">
-                <h2 className="font-bold truncate">Title</h2>
-                <p className="text-sm text-gray-400 whitespace-nowrap">
-                  Last Played: 1hr ago
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-row bg-gray-800/50 rounded-md p-2 items-center cursor-pointer">
-              <Image
-                src={games.at(1)!.portrait}
-                width={48}
-                height={48}
-                alt="profile"
-                className="w-[48px] h-[48px] rounded-md object-cover"
-              />
-              <div className="flex flex-col items-left w-full px-2">
-                <h2 className="font-bold truncate">Title</h2>
-                <p className="text-sm text-gray-400 whitespace-nowrap">
-                  Last Played: 1hr ago
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-row bg-gray-800/50 rounded-md p-2 items-center cursor-pointer">
-              <Image
-                src={games.at(2)!.portrait}
-                width={48}
-                height={48}
-                alt="profile"
-                className="w-[48px] h-[48px] rounded-md object-cover"
-              />
-              <div className="flex flex-col items-left w-full px-2">
-                <h2 className="font-bold truncate">Title</h2>
-                <p className="text-sm text-gray-400 whitespace-nowrap">
-                  Last Played: 1hr ago
-                </p>
-              </div>
-            </div>
+            <>
+              {games.map((item) => (
+                <div
+                  className="flex flex-row bg-gray-800/50 rounded-md p-2 items-center cursor-pointer"
+                  key={item.id}
+                >
+                  <Image
+                    src={item.portrait}
+                    width={48}
+                    height={48}
+                    alt="profile"
+                    className="w-[48px] h-[48px] rounded-md object-cover"
+                  />
+                  <div className="flex flex-col items-left w-full px-2">
+                    <h2 className="font-bold truncate">{item.name}</h2>
+                    <p className="text-sm text-gray-400 whitespace-nowrap">
+                      Last Played: 1hr ago
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </>
           </div>
         </>
       ) : (

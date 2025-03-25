@@ -2,127 +2,145 @@
   {
     "id": 1,
     "name": "FIFA 26",
-    "square": "",
-    "landscape": "",
-    "portrait": ""
+    "square": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/fifaL.PNG?v=1742854244967",
+    "landscape": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/fifaL.PNG?v=1742854244967",
+    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/fifaL.PNG?v=1742854244967",
+    "pub": "Electronic Arts"
   },
   {
     "id": 2,
     "name": "The Lamplighters League",
     "square": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/lamplightersS.PNG?v=1742843256411",
     "landscape": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/lamplightersL.jfif?v=1742843250342",
-    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/lamplightersP.PNG?v=1742843254318"
+    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/lamplightersP.PNG?v=1742843254318",
+    "pub": "Electronic Arts"
   },
   {
     "id": 3,
     "name": "Crackdown 3",
     "square": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/crackdownS.jpg?v=1742852056070",
     "landscape": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/crackdownL.jpg?v=1742852051630",
-    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/crackdownP.webp?v=1742852059386"
+    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/crackdownP.webp?v=1742852059386",
+    "pub": "Electronic Arts"
   },
   {
     "id": 4,
     "name": "The Show 24",
     "square": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/theShow24S.PNG?v=1742843056786",
     "landscape": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/theShow24L.jpg?v=1742842982024",
-    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/theShow24P.PNG?v=1742843003359"
+    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/theShow24P.PNG?v=1742843003359",
+    "pub": "Electronic Arts"
   },
   {
     "id": 5,
     "name": "Monster Hunter Rise",
     "square": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/MonsterRiseS.PNG?v=1742842797441",
     "landscape": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/monsterRise.PNG?v=1742842609121",
-    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/monsterRiseP.PNG?v=1742842660251"
+    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/monsterRiseP.PNG?v=1742842660251",
+    "pub": "Electronic Arts"
   },
   {
     "id": 6,
     "name": "Lil Gator Game",
     "square": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/lilGatorGameS.PNG?v=1742843428529",
     "landscape": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/lilGatorGameL.jpg?v=1742843433597",
-    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/lilGatorGameP.PNG?v=1742843436159"
+    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/lilGatorGameP.PNG?v=1742843436159",
+    "pub": "Electronic Arts"
   },
   {
     "id": 7,
     "name": "Open Roads",
     "square": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/openRoadsS.PNG?v=1742843662228",
     "landscape": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/openRoadsL.jpg?v=1742843668148",
-    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/openRoadsP.PNG?v=1742843665847"
+    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/openRoadsP.PNG?v=1742843665847",
+    "pub": "Electronic Arts"
   },
   {
     "id": 8,
     "name": "F1 24",
     "square": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/f124S.PNG?v=1742843871705",
     "landscape": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/f124L.jpg?v=1742843875940",
-    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/f124P.PNG?v=1742843877526"
+    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/f124P.PNG?v=1742843877526",
+    "pub": "Electronic Arts"
   },
   {
     "id": 9,
     "name": "One Lonely Outpost",
     "square": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/oneLonelyS.jpg?v=1742844035097",
     "landscape": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/onelonelyL.PNG?v=1742844041359",
-    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/oneLonelyP.jfif?v=1742844043619"
+    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/oneLonelyP.jfif?v=1742844043619",
+    "pub": "Electronic Arts"
   },
   {
     "id": 10,
     "name": "Farcry New Dawn",
     "square": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/far.PNG?v=1742846546279",
     "landscape": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/farCryL.jpg?v=1742846549199",
-    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/farCryP.jpg?v=1742846552960"
+    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/farCryP.jpg?v=1742846552960",
+    "pub": "Electronic Arts"
   },
   {
     "id": 11,
     "name": "Kingdom Two Crowns",
     "square": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/k2cS.PNG?v=1742846921034",
     "landscape": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/ktcL.jpg?v=1742846820604",
-    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/k2cP.PNG?v=1742846816945"
+    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/k2cP.PNG?v=1742846816945",
+    "pub": "Electronic Arts"
   },
   {
     "id": 12,
     "name": "Astroneer",
     "square": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/astroneerS.webp?v=1742847240358",
     "landscape": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/astroneerL.jpg?v=1742847236071",
-    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/astroneerP.webp?v=1742847241945"
+    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/astroneerP.webp?v=1742847241945",
+    "pub": "Electronic Arts"
   },
   {
     "id": 13,
     "name": "Battlefield V",
     "square": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/battlefieldS.webp?v=1742851524677",
     "landscape": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/battlefieldL.png?v=1742851520788",
-    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/battlefieldP.webp?v=1742851522060"
+    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/battlefieldP.webp?v=1742851522060",
+    "pub": "Electronic Arts"
   },
   {
     "id": 14,
     "name": "Contrast",
     "square": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/contrastS.jpg?v=1742851885495",
     "landscape": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/contrastL.jpg?v=1742851875462",
-    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/contrastP.jfif?v=1742851881009"
+    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/contrastP.jfif?v=1742851881009",
+    "pub": "Electronic Arts"
   },
   {
     "id": 15,
     "name": "Assassin's Creed Origins",
     "square": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/assassS.PNG?v=1742847074695",
     "landscape": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/assassL.jpg?v=1742847067171",
-    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/assassP.PNG?v=1742847070341"
+    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/assassP.PNG?v=1742847070341",
+    "pub": "Electronic Arts"
   },
   {
     "id": 16,
     "name": "Batman Arkham Knight",
     "square": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/batmanS.webp?v=1742851345606",
     "landscape": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/batmanL.jpg?v=1742851339437",
-    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/batmanP.PNG?v=1742851342707"
+    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/batmanP.PNG?v=1742851342707",
+    "pub": "Electronic Arts"
   },
   {
     "id": 17,
     "name": "Carrion",
     "square": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/carrionS.jpg?v=1742851670509",
     "landscape": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/carrionL.jpg?v=1742851667383",
-    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/carrionP.PNG?v=1742851674862"
+    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/carrionP.PNG?v=1742851674862",
+    "pub": "Electronic Arts"
   },
   {
     "id": 18,
     "name": "DayZ",
     "square": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/dayzS.webp?v=1742852214885",
     "landscape": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/dayzL.png?v=1742852208117",
-    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/dayzP.jpg?v=1742852211480"
+    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/dayzP.jpg?v=1742852211480",
+    "pub": "Electronic Arts"
   }
 ]
