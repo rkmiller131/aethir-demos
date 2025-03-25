@@ -3,11 +3,27 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import games from '../../../lib/games.json';
-import PlayNowButton from '../buttons/PlayNowButton';
+import { startGame } from '@/app/actions';
+import { APP_PAGES } from '@/app/lib/constants';
+import { AppPageType } from '@/app/lib/types';
 
 export default function LgCarousel() {
   const visibleCount = 3;
   const [startIndex, setStartIndex] = useState(0);
+  const [isStarting, setIsStarting] = useState(false);
+
+  const handlePlayNow = async () => {
+    if (isStarting) return;
+
+    try {
+      setIsStarting(true);
+      await startGame(APP_PAGES.GAMEPASS as AppPageType);
+    } catch (error) {
+      console.error('Error starting game:', error);
+    } finally {
+      setIsStarting(false);
+    }
+  };
 
   const scrollTo = (index: number) => {
     setStartIndex(index);
@@ -16,10 +32,19 @@ export default function LgCarousel() {
   return (
     <div className="relative mx-auto pb-6">
       <div className="flex gap-4 overflow-hidden">
-        {games.slice(startIndex, startIndex + visibleCount).map((item, i) => (
+        {games.slice(0, 3).map((item, i) => (
           <div
             key={i}
-            className="flex-shrink-0 min-w-[400px] h-[300px] bg-gray-800 rounded-lg overflow-hidden flex flex-col relative"
+            className={
+              i === 0
+                ? 'flex-shrink-0 min-w-[400px] h-[300px] bg-gray-800 rounded-lg overflow-hidden flex flex-col relative cursor-pointer hover:brightness-75 transition'
+                : 'flex-shrink-0 min-w-[400px] h-[300px] bg-gray-800 rounded-lg overflow-hidden flex flex-col relative cursor-not-allowed hover:brightness-75 transition'
+            }
+            onClick={() => {
+              if (i === 0) {
+                handlePlayNow();
+              }
+            }}
           >
             <div className="relative w-full h-full">
               <Image
@@ -38,14 +63,9 @@ export default function LgCarousel() {
                   className="rounded-t-lg"
                 />
 
-                <div className="absolute bottom-0 left-0 w-full p-3 bg-gradient-to-t from-black to-transparent flex justify-between items-center">
-                  <div>
-                    <p className="text-white font-bold truncate">{item.name}</p>
-                    <p className="text-gray-300 text-sm truncate">{item.pub}</p>
-                  </div>
-                  <div className="ml-auto">
-                    <PlayNowButton />
-                  </div>
+                <div className="absolute bottom-0 left-0 w-full p-3 bg-gradient-to-t from-black to-transparent items-center">
+                  <p className="text-white font-bold truncate">{item.name}</p>
+                  <p className="text-gray-300 text-sm truncate">{item.pub}</p>
                 </div>
               </div>
             </div>
@@ -58,8 +78,9 @@ export default function LgCarousel() {
           (_, index) => (
             <button
               key={index}
+              disabled={true}
               onClick={() => scrollTo(index * visibleCount)}
-              className={`w-2 h-2 rounded-full transition ${
+              className={`w-2 h-2 rounded-full transition cursor-not-allowed ${
                 startIndex === index * visibleCount
                   ? 'bg-white'
                   : 'bg-gray-500/50'
