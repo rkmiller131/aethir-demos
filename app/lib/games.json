@@ -9,10 +9,10 @@
   },
   {
     "id": 2,
-    "name": "The Lamplighters League",
-    "square": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/lamplightersS.PNG?v=1742843256411",
-    "landscape": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/lamplightersL.jfif?v=1742843250342",
-    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/lamplightersP.PNG?v=1742843254318",
+    "name": "DayZ",
+    "square": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/dayzS.webp?v=1742852214885",
+    "landscape": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/dayzL.png?v=1742852208117",
+    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/dayzP.jpg?v=1742852211480",
     "pub": "Electronic Arts"
   },
   {
@@ -133,14 +133,6 @@
     "square": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/carrionS.jpg?v=1742851670509",
     "landscape": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/carrionL.jpg?v=1742851667383",
     "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/carrionP.PNG?v=1742851674862",
-    "pub": "Electronic Arts"
-  },
-  {
-    "id": 18,
-    "name": "DayZ",
-    "square": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/dayzS.webp?v=1742852214885",
-    "landscape": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/dayzL.png?v=1742852208117",
-    "portrait": "https://cdn.glitch.global/c4f540ac-7f7c-41b2-ae89-9e2617351aa6/dayzP.jpg?v=1742852211480",
     "pub": "Electronic Arts"
   }
 ]

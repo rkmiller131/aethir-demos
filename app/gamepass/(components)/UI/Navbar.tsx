@@ -23,7 +23,7 @@ export default function Navbar() {
     <div
       className={
         active
-          ? 'flex flex-col min-w-[225px] min-h-screen p-2 bg-black'
+          ? 'flex flex-col min-w-[230px] min-h-screen p-2 bg-black'
           : 'flex flex-col min-h-screen p-2 bg-black'
       }
     >

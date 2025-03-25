@@ -30,7 +30,7 @@ export default function Carousel() {
   };
 
   return (
-    <div className="relative pb-4 mx-auto">
+    <div className="flex flex-col max-w-[1232px] mx-auto pb-4">
       <div className="flex justify-between items-center mb-4">
         <div>
           <h1 className="text-2xl font-bold">Picks for you</h1>
