@@ -62,22 +62,14 @@ export default function TopCarousel() {
                 }}
               >
                 <div className="relative w-full h-full">
-                  <Image
-                    src={item.portrait}
-                    alt={item.name}
-                    layout="fill"
-                    objectFit="cover"
-                    className="rounded-lg"
-                  />
                   <div className="relative w-full h-full">
                     <Image
-                      src={item.portrait}
+                      src={item.square}
                       alt={item.name}
                       layout="fill"
                       objectFit="cover"
                       className="rounded-t-lg"
                     />
-
                     <div className="absolute bottom-0 left-0 w-full p-3 bg-gradient-to-t from-black to-transparent items-center">
                       <p className="text-white font-bold truncate">
                         {item.name}
