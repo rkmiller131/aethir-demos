@@ -134,6 +134,7 @@ export default function Play({ slug }: { slug: number | null }) {
         title="Project Aragorn"
         src="about:blank"
         allowFullScreen
+        allow="autoplay; encrypted-media;"
       />
     </div>
   );
