@@ -9,7 +9,7 @@ import {
   SessionValidityResult
 } from "./types";
 import {
-  AETHIR_URL,
+  GAME_URL,
   REDIS_KEYS,
   SESSION_COOKIE_NAME,
   SESSION_TIMEOUT_MS,
@@ -181,8 +181,9 @@ export async function getGameUrl(): Promise<GameUrlResult> {
   }
 
   // Return the actual game streaming URL (can support up to 8 concurrent users at time of GDC 2025)
+  // Update: AWS link can support 4 concurrent users as of 4/24/25
   return {
     success: true,
-    url: AETHIR_URL
+    url: GAME_URL
   };
 }
