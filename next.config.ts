@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  allowedDevOrigins: ['*.amazonaws.com'],
+  allowedDevOrigins: ['*'],
   images: {
     remotePatterns: [
       {
@@ -14,35 +14,9 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     serverActions: {
-      allowedOrigins: ['*.amazonaws.com'],
+      allowedOrigins: ['*'],
     },
   }
-  // async headers() {
-  //   return [
-  //     {
-  //       // Apply CORS headers to all routes
-  //       source: '/:path*',
-  //       headers: [
-  //         {
-  //           key: 'Access-Control-Allow-Origin',
-  //           value: '*',
-  //         },
-  //         {
-  //           key: 'Access-Control-Allow-Methods',
-  //           value: 'GET, POST, PUT, DELETE, OPTIONS',
-  //         },
-  //         {
-  //           key: 'Access-Control-Allow-Headers',
-  //           value: 'X-Requested-With, Content-Type, Authorization',
-  //         },
-  //         {
-  //           key: 'Access-Control-Allow-Credentials',
-  //           value: 'true',
-  //         },
-  //       ],
-  //     },
-  //   ];
-  // },
 };
 
 export default nextConfig;
