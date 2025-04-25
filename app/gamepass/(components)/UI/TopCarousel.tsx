@@ -25,7 +25,7 @@ export default function TopCarousel() {
       setIsStarting(true);
       await startGame(APP_PAGES.GAMEPASS as AppPageType);
     } catch (error) {
-      console.error('Error starting game:', error);
+      console.error('Error starting game from TopCarousel.tsx:', error);
     } finally {
       setIsStarting(false);
     }

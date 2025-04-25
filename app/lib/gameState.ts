@@ -58,6 +58,7 @@ export async function startGameSession(): Promise<SessionResult> {
     cookieStore.set(SESSION_COOKIE_NAME, newSessionId, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
       maxAge: SESSION_TIMEOUT_MS / 1000
     });
 

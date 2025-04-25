@@ -49,7 +49,7 @@ export default function Carousel() {
       setIsStarting(true);
       await startGame(APP_PAGES.GAMEPASS as AppPageType);
     } catch (error) {
-      console.error('Error starting game:', error);
+      console.error('Error starting game from Carousel.tsx:', error);
     } finally {
       setIsStarting(false);
     }

@@ -11,15 +11,12 @@ export default function PlayNow() {
   const handlePlayNow = async () => {
     if (isStarting) return;
 
-    try {
-      setIsStarting(true);
-      // This will redirect to /play/0 if successful
-      await startGame(APP_PAGES.LANDING as AppPageType);
-    } catch (error) {
-      console.error("Error starting game:", error);
-    } finally {
-      setIsStarting(false);
-    }
+    setIsStarting(true);
+    // redirect happens inside the server action, and we can't put it in a try/catch
+    // because it will not be caught by the next.js side error handler for redirects.
+    await startGame(APP_PAGES.LANDING as AppPageType);
+    // reset if redirect doesn't happen.
+    setIsStarting(false);
   };
 
   return (

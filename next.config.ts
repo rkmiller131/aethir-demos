@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  allowedDevOrigins: ['*'],
+  allowedDevOrigins: ['ec2-13-52-61-50.us-west-1.compute.amazonaws.com'],
   images: {
     remotePatterns: [
       {
@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     serverActions: {
-      allowedOrigins: ['*'],
+      allowedOrigins: ['ec2-13-52-61-50.us-west-1.compute.amazonaws.com'],
     },
   }
 };
