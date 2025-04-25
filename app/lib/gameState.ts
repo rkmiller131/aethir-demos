@@ -57,7 +57,8 @@ export async function startGameSession(): Promise<SessionResult> {
     const cookieStore = await cookies();
     cookieStore.set(SESSION_COOKIE_NAME, newSessionId, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      // secure: process.env.NODE_ENV === "production",
+      // can't be secure unless we have a valid SSL cert and serve in https, which we won't in aws ec2 version
       sameSite: "lax",
       maxAge: SESSION_TIMEOUT_MS / 1000
     });

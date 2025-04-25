@@ -89,7 +89,7 @@ export async function checkPassword(password: string) {
     // Set a cookie to maintain the authenticated session
     (await cookies()).set('auth', 'true', {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+      // secure: process.env.NODE_ENV === 'production',
       maxAge: 60 * 60, // 1 hour
       path: page,
     });
