@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useState } from "react";
 import { startGame } from "@/app/actions";
 import { APP_PAGES } from "@/app/lib/constants";
-import { AppPageType } from "@/app/lib/types";
 
 export default function PlayNowButton() {
   const [isStarting, setIsStarting] = useState(false);
@@ -15,7 +14,7 @@ export default function PlayNowButton() {
     setIsStarting(true);
     // redirect happens inside the server action, and we can't put it in a try/catch
     // because it will not be caught by the next.js side error handler for redirects.
-    await startGame(APP_PAGES.NETFLIX as AppPageType);
+    await startGame(APP_PAGES.NETFLIX);
     // reset if redirect doesn't happen.
     setIsStarting(false);
   };

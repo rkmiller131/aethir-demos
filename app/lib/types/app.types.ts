@@ -1,1 +1,1 @@
-export type AppPageType = "/netflix" | "/landing" | "/gamepass";
+export type AppPageType = "/netflix" | "/landing" | "/gamepass" | "/luna";

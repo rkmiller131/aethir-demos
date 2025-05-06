@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { startGame } from '@/app/actions';
 import { APP_PAGES } from '@/app/lib/constants';
-import { AppPageType } from '@/app/lib/types';
 import { Loader, Play } from 'lucide-react';
 
 export default function PlayNowButton() {
@@ -15,7 +14,7 @@ export default function PlayNowButton() {
     setIsStarting(true);
     // redirect happens inside the server action, and we can't put it in a try/catch
     // because it will not be caught by the next.js side error handler for redirects.
-    await startGame(APP_PAGES.GAMEPASS as AppPageType);
+    await startGame(APP_PAGES.GAMEPASS);
     // reset if redirect doesn't happen.
     setIsStarting(false);
   };

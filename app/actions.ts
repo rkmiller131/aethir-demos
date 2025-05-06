@@ -31,12 +31,16 @@ export async function checkGameSessionValidity() {
 export async function startGame(page: AppPageType) {
   const result = await startGameSession();
 
-  if (result.success && page === APP_PAGES.LANDING) {
-    redirect('/play/0');
-  } else if (result.success && page === APP_PAGES.NETFLIX) {
-    redirect('/play/1');
-  } else if (result.success && page === APP_PAGES.GAMEPASS) {
-    redirect('/play/2');
+  if (result.success) {
+    if (page === APP_PAGES.LANDING) {
+      redirect('/play/0');
+    } else if (page === APP_PAGES.NETFLIX) {
+      redirect('/play/1');
+    } else if (page === APP_PAGES.GAMEPASS) {
+      redirect('/play/2');
+    } else if (page === APP_PAGES.LUNA) {
+      redirect('/play/3');
+    }
   }
 
   return result;
@@ -74,21 +78,26 @@ export async function checkPassword(password: string) {
   const netflixPassword = process.env.NETFLIX_PASSWORD;
   const landingPassword = process.env.LANDING_PASSWORD;
   const gamepassPassword = process.env.GAMEPASS_PASSWORD;
+  const lunaPassword = process.env.LUNA_PASSWORD;
 
   if (
     password === netflixPassword ||
     password === landingPassword ||
-    password === gamepassPassword
+    password === gamepassPassword ||
+    password === lunaPassword
   ) {
     const page =
       password === netflixPassword
         ? APP_PAGES.NETFLIX
         : password === landingPassword
         ? APP_PAGES.LANDING
-        : APP_PAGES.GAMEPASS;
+        : password === gamepassPassword
+        ? APP_PAGES.GAMEPASS
+        : APP_PAGES.LUNA;
     // Set a cookie to maintain the authenticated session
     (await cookies()).set('auth', 'true', {
       httpOnly: true,
+      // https://www.wisp.blog/blog/why-your-nextjs-15-cookies-work-locally-but-break-in-production-and-how-to-fix-it
       // secure: process.env.NODE_ENV === 'production',
       maxAge: 60 * 60, // 1 hour
       path: page,

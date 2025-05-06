@@ -6,7 +6,6 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import games from '../../../lib/games.json';
 import { startGame } from '@/app/actions';
 import { APP_PAGES } from '@/app/lib/constants';
-import { AppPageType } from '@/app/lib/types';
 
 export default function Carousel() {
   const [startIndex, setStartIndex] = useState(0);
@@ -47,7 +46,7 @@ export default function Carousel() {
 
     try {
       setIsStarting(true);
-      await startGame(APP_PAGES.GAMEPASS as AppPageType);
+      await startGame(APP_PAGES.GAMEPASS);
     } catch (error) {
       console.error('Error starting game from Carousel.tsx:', error);
     } finally {
