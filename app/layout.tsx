@@ -6,7 +6,18 @@ import EmergencyRedButton from "@/components/UI/buttons/EmergencyRedButton";
 import "./globals.css";
 
 const amazonEmber = localFont({
-  src: "Amazon_Ember_Heavy.woff2",
+  src: [
+    {
+      path: "Amazon_Ember_Heavy.woff2",
+      weight: "800",
+      style: "bold",
+    },
+    {
+      path: "Amazon_Ember_Medium.woff2",
+      weight: "500",
+      style: "normal",
+    }
+  ],
   display: "swap",
   variable: "--font-amazon-ember",
 });
