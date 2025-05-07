@@ -2,8 +2,9 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
-import PlayNowButton from "@/app/netflix/(components)/banner/buttons/PlayNowButton";
 import MoreInfoButton from "./buttons/MoreInfoButton";
+import PlayNowButton from "@/components/UI/buttons/PlayNowButton";
+import { APP_PAGES } from "@/app/lib/constants";
 
 export default function BannerMovie() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -37,7 +38,7 @@ export default function BannerMovie() {
           {/* UI Buttons */}
           <div className="flex flex-col lg:flex-row gap-2 text-[2.5vw] lg:text-3xl justify-between items-stretch">
             <div className="flex gap-2">
-              <PlayNowButton />
+              <PlayNowButton page={APP_PAGES.NETFLIX}/>
               <MoreInfoButton />
             </div>
             <div className="flex gap-0 md:gap-4 items-center self-end">

@@ -9,7 +9,6 @@ import {
 } from '@/app/actions';
 import Stinger from '@/components/Stinger';
 import { APP_PAGES } from '@/app/lib/constants';
-import { AppPageType } from '@/app/lib/types';
 
 export default function Play({ slug }: { slug: number | null }) {
   const router = useRouter();
@@ -27,6 +26,9 @@ export default function Play({ slug }: { slug: number | null }) {
       break;
     case 2:
       route = APP_PAGES.GAMEPASS;
+      break;
+    case 3:
+      route = APP_PAGES.LUNA;
       break;
     default:
       route = APP_PAGES.LANDING;
@@ -47,7 +49,7 @@ export default function Play({ slug }: { slug: number | null }) {
   };
 
   const handleBack = async () => {
-    await endGame(route as AppPageType);
+    await endGame(route);
   };
 
   const handleStingerEnd = (): void => {
@@ -65,7 +67,7 @@ export default function Play({ slug }: { slug: number | null }) {
         const result = await checkGameSessionValidity();
         if (!result.isValid) {
           setTimeoutAlert(true);
-          await endGame(route as AppPageType);
+          await endGame(route);
           setTimeout(() => {
             router.push(route);
           }, 3000);
@@ -102,12 +104,9 @@ export default function Play({ slug }: { slug: number | null }) {
   }, [stingerEnded]);
 
   if (!stingerEnded) {
-    if (slug === 0) {
-      handleStingerEnd();
-      return null;
-    } else if (slug === 1) {
+    if (slug === 1) {
       return <Stinger onEnd={handleStingerEnd} version={slug} />;
-    } else if (slug === 2) {
+    } else if (slug === 0 || slug === 2 || slug === 3) {
       handleStingerEnd();
       return null;
     }

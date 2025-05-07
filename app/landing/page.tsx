@@ -1,8 +1,9 @@
 "use client";
 
 import { useRef, useState } from "react";
-import PlayNow from "./(components)/PlayNow";
 import Image from "next/image";
+import PlayNowButton from "@/components/UI/buttons/PlayNowButton";
+import { APP_PAGES } from "../lib/constants";
 
 export default function Landing() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -18,7 +19,7 @@ export default function Landing() {
   return (
     <div className="w-[100dvw] h-[100dvh]">
       <div className="flex">
-        <PlayNow />
+        <PlayNowButton page={APP_PAGES.LANDING}/>
         <Image
           src={isMuted ? "/sound-off.svg" : "/sound-on.svg"}
           alt="Toggle Sound"

@@ -16,7 +16,8 @@ export async function middleware(request: NextRequest) {
   if (
     request.nextUrl.pathname.startsWith("/netflix") ||
     request.nextUrl.pathname.startsWith("/landing") ||
-    request.nextUrl.pathname.startsWith("/gamepass")
+    request.nextUrl.pathname.startsWith("/gamepass") ||
+    request.nextUrl.pathname.startsWith("/luna")
   ) {
     const authToken = request.cookies.get("auth")?.value;
     const isAuthenticated = !!authToken;
