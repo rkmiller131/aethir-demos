@@ -1,8 +1,15 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import EmergencyRedButton from "@/components/UI/buttons/EmergencyRedButton";
 
 import "./globals.css";
+
+const amazonEmber = localFont({
+  src: "Amazon_Ember_Heavy.woff2",
+  display: "swap",
+  variable: "--font-amazon-ember",
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${amazonEmber.className} antialiased`}
       >
         {children}
         <EmergencyRedButton />
