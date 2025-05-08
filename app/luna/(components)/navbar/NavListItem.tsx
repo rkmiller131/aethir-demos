@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import Icon from "./icons/Icon";
+import Icon from "../icons/Icon";
 
 interface NavListItemProps {
   icon: ReactNode;

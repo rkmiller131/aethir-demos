@@ -1,6 +1,6 @@
-import CaretDown from "./icons/CaretDown";
-import ControllerIcon from "./icons/ControllerIcon";
-import Icon from "./icons/Icon";
+import CaretDown from "../icons/CaretDown";
+import ControllerIcon from "../icons/ControllerIcon";
+import Icon from "../icons/Icon";
 import Image from "next/image";
 
 export default function NavRight() {

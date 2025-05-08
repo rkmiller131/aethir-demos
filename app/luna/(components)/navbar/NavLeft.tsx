@@ -1,11 +1,11 @@
 import Image from "next/image";
-import HomeIcon from "./icons/HomeIcon";
+import HomeIcon from "../icons/HomeIcon";
 import NavListItem from "./NavListItem";
-import LibraryIcon from "./icons/LibraryIcon";
-import PlaylistIcon from "./icons/PlaylistIcon";
-import CouchIcon from "./icons/CouchIcon";
-import BroadcastIcon from "./icons/BroadcastIcon";
-import SearchIcon from "./icons/SearchIcon";
+import LibraryIcon from "../icons/LibraryIcon";
+import PlaylistIcon from "../icons/PlaylistIcon";
+import CouchIcon from "../icons/CouchIcon";
+import BroadcastIcon from "../icons/BroadcastIcon";
+import SearchIcon from "../icons/SearchIcon";
 
 export default function NavLeft() {
   return (
