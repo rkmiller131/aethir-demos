@@ -1,12 +1,27 @@
-import HomeIcon from "./icons/HomeIcon";
+import { ReactNode } from "react";
+import Icon from "./icons/Icon";
 
-export default function NavListItem({ text }: { text: string }) {
+interface NavListItemProps {
+  icon: ReactNode;
+  text: string;
+  active?: boolean;
+}
+
+export default function NavListItem({ icon, text, active = false }: NavListItemProps) {
   return (
     <div
-      className="relative flex items-center gap-2 after:content-[''] after:absolute after:bg-[#fff] after:height-[2px] after:width-[25px] after:bottom-[-25px]"
+      className={`relative flex items-center gap-2 ${
+        active
+          ? "after:content-[''] after:absolute after:bg-white after:h-0.75 after:w-full after:left-0 after:bottom-[-25px]"
+          : ""
+      }`}
     >
-      <HomeIcon />
-      <span>{text}</span>
+      {
+        <Icon size="md">
+          {icon}
+        </Icon>
+      }
+      <span className="hidden lg:block text-sm">{text}</span>
     </div>
   );
 }
