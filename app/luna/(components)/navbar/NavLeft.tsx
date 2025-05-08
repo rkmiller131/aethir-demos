@@ -1,4 +1,6 @@
 import Image from "next/image";
+import HomeIcon from "./icons/HomeIcon";
+import NavListItem from "./NavListItem";
 
 export default function NavLeft() {
   return (
@@ -10,9 +12,10 @@ export default function NavLeft() {
         height={152}
         className="w-[120px] h-auto"
       />
-      <div className="hidden lg:flex font-ember font-bold px-[7px] py-[2px] bg-gradient-to-r from-[#2eaae8] to-[#02fddc] bg-clip-text text-transparent border border-l-[#2eaae8] border-b-[#2eaae8] border-r-[#02fddc] border-t-[#02fddc] rounded-sm">
+      <div className="hidden lg:flex font-ember font-bold px-[7px] py-[2px] mr-[16px] bg-gradient-to-r from-[#2eaae8] to-[#02fddc] bg-clip-text text-transparent border border-l-[#2eaae8] border-b-[#2eaae8] border-r-[#02fddc] border-t-[#02fddc] rounded-sm">
         CLOUD GAMING
       </div>
+      <NavListItem text="Home" />
     </div>
   );
 }
