@@ -4,7 +4,7 @@ import GameGrid from "./(components)/grid/GameGrid";
 
 export default function Luna() {
   return (
-    <div className="flex flex-col gap-4 bg-[#0f071a] text-white h-screen">
+    <div className="flex flex-col gap-4 bg-[#0f071a] text-white pb-10">
       <Navbar />
       <Hero />
       <GameGrid />

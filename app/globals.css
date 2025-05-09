@@ -14,6 +14,16 @@
   --font-ember: var(--font-amazon-ember);
 }
 
+/* Chrome, Safari and Opera */
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hidden {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
 .bggp {
   position: absolute;
   top: 0;
