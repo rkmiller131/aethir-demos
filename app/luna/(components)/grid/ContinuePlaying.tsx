@@ -16,14 +16,16 @@ export default function ContinuePlaying() {
             width={24}
             height={24}
           />
-          <div>CONTINUE PLAYING</div>
+          <div className="text-lg lg:text-2xl">
+            CONTINUE PLAYING
+          </div>
         </span>
       </div>
       <span className="px-16 flex gap-6">
         <FIFAPopup />
         <div className="flex flex-col gap-3 items-center justify-center w-[300px] bg-[#181818] rounded-md cursor-not-allowed">
           <Icon size="xxl">{<LibraryIcon />}</Icon>
-          <span className="text-2xl">See Your Games</span>
+          <span className="text-md lg:text-2xl">See Your Games</span>
         </div>
       </span>
     </div>
