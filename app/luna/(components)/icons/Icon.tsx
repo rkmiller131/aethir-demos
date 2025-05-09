@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 interface IconProps {
   children: ReactNode;
-  size?: "sm" | "md" | "lg" | "xl";
+  size?: "sm" | "md" | "lg" | "xl" | "xxl";
 }
 
 export default function Icon({ children, size = "sm" }: IconProps) {
@@ -12,6 +12,7 @@ export default function Icon({ children, size = "sm" }: IconProps) {
     md: 20,
     lg: 24,
     xl: 32,
+    xxl: 42
   };
 
   const pixelSize = sizeMap[size];

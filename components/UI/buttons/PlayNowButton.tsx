@@ -7,7 +7,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { Loader, Play } from 'lucide-react';
 
-export default function PlayNowButton({ page }: { page: AppPageType }) {
+export default function PlayNowButton({ page, alt }: { page: AppPageType, alt?: boolean }) {
     const [isStarting, setIsStarting] = useState(false);
 
     const handlePlayNow = async () => {
@@ -78,16 +78,44 @@ export default function PlayNowButton({ page }: { page: AppPageType }) {
     }
 
     if (page === APP_PAGES.LUNA) {
-      return (
-        <button
-          className="bg-gradient-to-br from-[#9146ff] to-[#5f00ff] rounded-lg w-[75%] text-center text-md lg:text-lg border-4 border-transparent hover:opacity-80 hover:shadow-[0_0_0_2px_rgb(90,208,190)] hover:bg-clip-content transition-all duration-200 ease-in-out cursor-pointer"
-          disabled={isStarting}
-          onClick={handlePlayNow}
-        >
-          <div className="py-2">
-            {isStarting ? "Starting game" : "Play now"}
-          </div>
-        </button>
-      );
+      if (alt) {
+        return (
+          <button
+            className="bg-gradient-to-br from-[#9146ff] to-[#5f00ff] rounded-md mb-3 text-center text-sm lg:text-md hover:opacity-80 transition-all duration-200 ease-in-out cursor-pointer"
+            disabled={isStarting}
+            onClick={handlePlayNow}
+          >
+            <div className="flex gap-2 items-center justify-center py-2">
+              <Image
+                src="/luna_icon.svg"
+                alt="Luna Icon"
+                height={30}
+                width={30}
+                className="w-[16px] h-auto ml-[-16px]"
+              />
+              {isStarting ? "Starting game" : "Play now"}
+            </div>
+          </button>
+        );
+      } else {
+        return (
+          <button
+            className="bg-gradient-to-br from-[#9146ff] to-[#5f00ff] rounded-lg w-[75%] text-center text-md lg:text-lg border-4 border-transparent hover:opacity-80 hover:shadow-[0_0_0_2px_rgb(90,208,190)] hover:bg-clip-content transition-all duration-200 ease-in-out cursor-pointer"
+            disabled={isStarting}
+            onClick={handlePlayNow}
+          >
+            <div className="flex gap-3 items-center justify-center py-2">
+              <Image
+                src="/luna_icon.svg"
+                alt="Luna Icon"
+                height={30}
+                width={30}
+                className="ml-[-30px]"
+              />
+              {isStarting ? "Starting game" : "Play now"}
+            </div>
+          </button>
+        );
+      }
     }
 }
