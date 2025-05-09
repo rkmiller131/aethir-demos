@@ -6,6 +6,7 @@ export default function CaretRight() {
       width="100%"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className="cursor-not-allowed"
     >
       <g>
         <path

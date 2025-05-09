@@ -6,7 +6,7 @@ import Image from "next/image";
 export default function NavRight() {
   return (
     <div className="flex items-center gap-6">
-      <div className="hidden xl:block text-xs rounded-md py-2 px-4 bg-[#9146ff]">
+      <div className="hidden xl:block text-sm rounded-md py-2 px-4 bg-[#9146ff]">
         Subscribe to Luna+
       </div>
       <div className="hidden lg:block relative">
@@ -19,9 +19,8 @@ export default function NavRight() {
           alt="Luna Avatar"
           width={32}
           height={32}
-          className="w-[28px] h-auto"
         />
-        <Icon size="md">{<CaretDown />}</Icon>
+        <Icon size="lg">{<CaretDown />}</Icon>
       </div>
     </div>
   );

@@ -78,6 +78,16 @@ export default function PlayNowButton({ page }: { page: AppPageType }) {
     }
 
     if (page === APP_PAGES.LUNA) {
-
+      return (
+        <button
+          className="bg-gradient-to-br from-[#9146ff] to-[#5f00ff] rounded-lg w-[75%] text-center text-md lg:text-lg border-4 border-transparent hover:opacity-80 hover:shadow-[0_0_0_2px_rgb(90,208,190)] hover:bg-clip-content transition-all duration-200 ease-in-out cursor-pointer"
+          disabled={isStarting}
+          onClick={handlePlayNow}
+        >
+          <div className="py-2">
+            {isStarting ? "Starting game" : "Play now"}
+          </div>
+        </button>
+      );
     }
 }

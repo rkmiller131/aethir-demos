@@ -1,34 +1,42 @@
+import PlayNowButton from "@/components/UI/buttons/PlayNowButton";
 import CaretLeft from "./icons/CaretLeft";
 import CaretRight from "./icons/CaretRight";
 import Icon from "./icons/Icon";
 import Image from "next/image";
+import { APP_PAGES } from "@/app/lib/constants";
 
 export default function Hero() {
   return (
     <div className="flex items-center justify-center w-full p-4 mt-[75px] gap-4">
-      <Icon size="lg">{<CaretLeft />}</Icon>
-      <div className="flex flex-grow justify-between items-center bg-[#040207] rounded-xl shadow-lg h-[400px]">
-        <div className="flex flex-col justify-evenly h-full py-4 px-12 h-full">
+      <Icon size="xl">
+        {<CaretLeft />}
+      </Icon>
+      <div className="flex flex-grow justify-between items-center bg-[#040207] rounded-xl shadow-lg h-full">
+        <div className="flex flex-col justify-evenly h-full py-4 px-12 h-full gap-4">
+
           <Image
             src="/FIFA-logo.png"
             alt="FIFA Logo"
             height={500}
             width={500}
-            className="h-[45px] lg:h-[75px] w-auto mb-8"
+            className="h-[45px] lg:h-[75px] w-fit mb-8"
           />
           <div className="text-lg lg:text-xl">
             Feel the glory of lifting the World Cup
           </div>
-          <div
-            className="bg-gradient-to-br from-[#9146ff] to-[#5f00ff] rounded-lg w-[75%] text-center text-md lg:text-lg border-4 border-transparent hover:opacity-80 hover:shadow-[0_0_0_2px_rgb(90,208,190)] hover:bg-clip-content transition-all duration-200 ease-in-out cursor-pointer"
-          >
-            <div className="py-2">
-              Play now
-            </div>
+
+          <PlayNowButton page={APP_PAGES.LUNA}/>
+
+          {/* Pagination */}
+          <div className="flex gap-2 items-center">
+            <span className="w-[5px] h-[5px] bg-white opacity-50 rounded-full"/>
+            <span className="w-[8px] h-[8px] bg-[#5ad0be] rounded-full"/>
+            <span className="w-[5px] h-[5px] bg-white opacity-50 rounded-full"/>
+            <span className="w-[5px] h-[5px] bg-white opacity-50 rounded-full"/>
+            <span className="w-[5px] h-[5px] bg-white opacity-50 rounded-full"/>
           </div>
-          <div>...</div>
         </div>
-        <div className="hidden lg:block w-[50%] rounded-xl h-[400px]">
+        <div className="hidden lg:block w-[50%] rounded-xl h-[425px]">
           <video
             autoPlay
             muted
@@ -42,7 +50,9 @@ export default function Hero() {
           </video>
         </div>
       </div>
-      <Icon size="lg">{<CaretRight />}</Icon>
+      <Icon size="xl">
+        {<CaretRight />}
+      </Icon>
     </div>
   );
 }
