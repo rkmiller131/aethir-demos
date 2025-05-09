@@ -12,8 +12,7 @@ export default function Hero() {
         {<CaretLeft />}
       </Icon>
       <div className="flex flex-grow justify-between items-center bg-[#040207] rounded-xl shadow-lg h-full">
-        <div className="flex flex-col justify-evenly h-full py-4 px-12 h-full gap-4">
-
+        <div className="flex flex-col justify-evenly py-4 px-12 h-[425px] gap-4">
           <Image
             src="/FIFA-logo.png"
             alt="FIFA Logo"
