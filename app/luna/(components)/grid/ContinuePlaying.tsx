@@ -23,7 +23,7 @@ export default function ContinuePlaying() {
       </div>
       <span className="px-16 flex gap-6">
         <FIFAPopup />
-        <div className="flex flex-col gap-3 items-center justify-center w-[300px] bg-[#181818] rounded-md cursor-not-allowed">
+        <div className="flex flex-col gap-3 items-center justify-center w-[338px] bg-[#181818] rounded-lg cursor-not-allowed">
           <Icon size="xxl">{<LibraryIcon />}</Icon>
           <span className="text-md lg:text-2xl">See Your Games</span>
         </div>

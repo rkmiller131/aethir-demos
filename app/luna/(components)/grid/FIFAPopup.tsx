@@ -38,7 +38,7 @@ export default function FIFAPopup() {
         alt="FIFA Thumbnail"
         width={2560}
         height={1440}
-        className="rounded-md w-[300px] cursor-pointer"
+        className="rounded-md w-[338px] cursor-pointer"
       />
 
       <div
@@ -46,7 +46,7 @@ export default function FIFAPopup() {
                    transition-all duration-600 ease-in-out
                    ${isPopupVisible ? 'opacity-100 translate-y-0 cursor-pointer' : 'opacity-0 translate-y-2 pointer-events-none'}`}
       >
-        <div className="relative rounded-md">
+        <div className="relative rounded-lg">
           <video
             ref={videoRef}
             autoPlay

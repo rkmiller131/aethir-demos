@@ -9,6 +9,12 @@ const nextConfig: NextConfig = {
         hostname: 'cdn.glitch.global',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'm.media-amazon.com',
+        port: '',
+        pathname: '/**',
       }
     ],
   },
