@@ -6,7 +6,8 @@ import {
   ActiveSessions,
   GameUrlResult,
   SessionResult,
-  SessionValidityResult
+  SessionValidityResult,
+  StreamProviderType
 } from "./types";
 import {
   AETHIR_URL,
@@ -169,7 +170,7 @@ export async function getSessionValidity(): Promise<SessionValidityResult> {
  * This keeps the actual URL private and only exposes it to authorized users
  * @returns Object with the game URL if successful
 */
-export async function getGameUrl(provider?: "AETHIR" | "GAMELIFT"): Promise<GameUrlResult> {
+export async function getGameUrl(provider?: StreamProviderType): Promise<GameUrlResult> {
   const sessionCookie = (await cookies()).get(SESSION_COOKIE_NAME);
 
   if (!sessionCookie) {

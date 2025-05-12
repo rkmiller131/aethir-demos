@@ -9,6 +9,7 @@ import {
 } from '@/app/actions';
 import Stinger from '@/components/Stinger';
 import { APP_PAGES } from '@/app/lib/constants';
+import { StreamProviderType } from '@/app/lib/types';
 
 export default function Play({ slug }: { slug: number | null }) {
   const router = useRouter();
@@ -16,7 +17,7 @@ export default function Play({ slug }: { slug: number | null }) {
   const [timeoutAlert, setTimeoutAlert] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   let route;
-  let provider: "GAMELIFT" | "AETHIR";
+  let provider: StreamProviderType;
 
   switch (slug) {
     case 0:
