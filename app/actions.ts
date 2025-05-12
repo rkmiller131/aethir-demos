@@ -11,7 +11,7 @@ import {
 } from '@/app/lib/gameState';
 import { cookies } from 'next/headers';
 import { APP_PAGES } from './lib/constants';
-import { AppPageType } from './lib/types';
+import { AppPageType, StreamProviderType } from './lib/types';
 
 // Initialize game state on app startup
 initializeGameState().catch(console.error);
@@ -67,7 +67,7 @@ export async function endGamesInPlace() {
  * Server action to get the game URL
  * Called by the game page to load the iframe
  */
-export async function getGameStreamUrl(provider?: "AETHIR" | "GAMELIFT") {
+export async function getGameStreamUrl(provider?: StreamProviderType) {
   return getGameUrl(provider);
 }
 

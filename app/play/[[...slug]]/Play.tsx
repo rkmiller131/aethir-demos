@@ -1,56 +1,52 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import {
   checkGameSessionValidity,
   endGame,
-  getGameStreamUrl,
 } from '@/app/actions';
 import Stinger from '@/components/Stinger';
 import { APP_PAGES } from '@/app/lib/constants';
+import EmbeddedProxy from '../(components)/EmbeddedProxy';
 
 export default function Play({ slug }: { slug: number | null }) {
   const router = useRouter();
   const [stingerEnded, setStingerEnded] = useState(false);
   const [timeoutAlert, setTimeoutAlert] = useState(false);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
+  // const iframeRef = useRef<HTMLIFrameElement>(null);
   let route;
-  let provider: "GAMELIFT" | "AETHIR";
 
   switch (slug) {
     case 0:
       route = APP_PAGES.LANDING;
-      provider = "GAMELIFT";
       break;
     case 1:
       route = APP_PAGES.NETFLIX;
-      provider = "AETHIR";
       break;
     case 2:
       route = APP_PAGES.GAMEPASS;
       break;
     case 3:
       route = APP_PAGES.LUNA;
-      provider = "GAMELIFT";
       break;
     default:
       route = APP_PAGES.LANDING;
   }
 
-  const loadGameUrl = async () => {
-    try {
-      const result = provider ? await getGameStreamUrl(provider) : await getGameStreamUrl();
-      if (result.success && iframeRef.current && result.url) {
-        iframeRef.current.src = result.url;
-      }
-    } catch (error) {
-      console.error('Error loading game URL:', error);
-      setTimeout(() => {
-        router.push(route);
-      }, 2000);
-    }
-  };
+  // const loadGameUrl = async () => {
+  //   try {
+  //     const result = provider ? await getGameStreamUrl(provider) : await getGameStreamUrl();
+  //     if (result.success && iframeRef.current && result.url) {
+  //       iframeRef.current.src = result.url;
+  //     }
+  //   } catch (error) {
+  //     console.error('Error loading game URL:', error);
+  //     setTimeout(() => {
+  //       router.push(route);
+  //     }, 2000);
+  //   }
+  // };
 
   const handleBack = async () => {
     await endGame(route);
@@ -62,9 +58,9 @@ export default function Play({ slug }: { slug: number | null }) {
   };
 
   useEffect(() => {
-    if (stingerEnded) {
-      loadGameUrl();
-    }
+    // if (stingerEnded) {
+    //   loadGameUrl();
+    // }
 
     const checkSessionValidity = async () => {
       try {
@@ -131,14 +127,15 @@ export default function Play({ slug }: { slug: number | null }) {
       >
         SESSION TIMEOUT
       </span>
-      <iframe
+      {/* <iframe
         ref={iframeRef}
         className="absolute z-10 w-full h-full border-none top-0 left-0"
         title="Project Aragorn"
         src="about:blank"
         allowFullScreen
         allow="autoplay; encrypted-media;"
-      />
+      /> */}
+      {stingerEnded && <EmbeddedProxy slug={slug}/>}
     </div>
   );
 }

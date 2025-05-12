@@ -12,6 +12,7 @@ export interface GameUrlResult extends SessionResult {
    * The URL to the game streaming service (only present if success is true)
   */
   url?: string;
+  isHttp?: boolean;
 };
 
 export interface SessionValidityResult {
