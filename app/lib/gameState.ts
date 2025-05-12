@@ -9,7 +9,9 @@ import {
   SessionValidityResult
 } from "./types";
 import {
+  AETHIR_URL,
   GAME_URL,
+  GAMELIFT_URL,
   REDIS_KEYS,
   SESSION_COOKIE_NAME,
   SESSION_TIMEOUT_MS,
@@ -167,7 +169,7 @@ export async function getSessionValidity(): Promise<SessionValidityResult> {
  * This keeps the actual URL private and only exposes it to authorized users
  * @returns Object with the game URL if successful
 */
-export async function getGameUrl(): Promise<GameUrlResult> {
+export async function getGameUrl(provider?: "AETHIR" | "GAMELIFT"): Promise<GameUrlResult> {
   const sessionCookie = (await cookies()).get(SESSION_COOKIE_NAME);
 
   if (!sessionCookie) {
@@ -183,8 +185,9 @@ export async function getGameUrl(): Promise<GameUrlResult> {
 
   // Return the actual game streaming URL (can support up to 8 concurrent users at time of GDC 2025)
   // Update: AWS link can support 4 concurrent users as of 4/24/25
+  const url = provider === "AETHIR" ? AETHIR_URL : provider === "GAMELIFT" ? GAMELIFT_URL : GAME_URL;
   return {
     success: true,
-    url: GAME_URL
+    url
   };
 }

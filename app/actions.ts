@@ -67,8 +67,8 @@ export async function endGamesInPlace() {
  * Server action to get the game URL
  * Called by the game page to load the iframe
  */
-export async function getGameStreamUrl() {
-  return getGameUrl();
+export async function getGameStreamUrl(provider?: "AETHIR" | "GAMELIFT") {
+  return getGameUrl(provider);
 }
 
 /**

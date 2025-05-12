@@ -16,19 +16,23 @@ export default function Play({ slug }: { slug: number | null }) {
   const [timeoutAlert, setTimeoutAlert] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   let route;
+  let provider: "GAMELIFT" | "AETHIR";
 
   switch (slug) {
     case 0:
       route = APP_PAGES.LANDING;
+      provider = "GAMELIFT";
       break;
     case 1:
       route = APP_PAGES.NETFLIX;
+      provider = "AETHIR";
       break;
     case 2:
       route = APP_PAGES.GAMEPASS;
       break;
     case 3:
       route = APP_PAGES.LUNA;
+      provider = "GAMELIFT";
       break;
     default:
       route = APP_PAGES.LANDING;
@@ -36,7 +40,7 @@ export default function Play({ slug }: { slug: number | null }) {
 
   const loadGameUrl = async () => {
     try {
-      const result = await getGameStreamUrl();
+      const result = provider ? await getGameStreamUrl(provider) : await getGameStreamUrl();
       if (result.success && iframeRef.current && result.url) {
         iframeRef.current.src = result.url;
       }
