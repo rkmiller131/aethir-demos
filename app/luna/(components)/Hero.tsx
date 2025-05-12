@@ -21,7 +21,7 @@ export default function Hero() {
             className="h-[45px] lg:h-[75px] w-fit mb-8"
           />
           <div className="text-lg lg:text-xl">
-            Feel the glory of lifting the World Cup
+            Feel the glory of lifting the FIFA World Cup 26™ trophy.
           </div>
 
           <PlayNowButton page={APP_PAGES.LUNA}/>

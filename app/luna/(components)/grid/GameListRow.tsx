@@ -11,11 +11,11 @@ interface GameListRow {
 
 export default function GameListRow({ header, gameList }: GameListRow) {
   return (
-    <div className="mt-6 flex flex-col gap-2 cursor-not-allowed">
+    <div className="mt-6 flex flex-col gap-2 cursor-not-allowed w-full overflow-hidden">
       <div className="flex gap-4 px-16 py-0">
         {header}
       </div>
-      <div className="relative  px-16 flex gap-6">
+      <div className="relative px-16 flex gap-4 lg:gap-6">
         {gameList.map((game: LunaGame) => (
           <Image
             src={game.src}
@@ -23,7 +23,8 @@ export default function GameListRow({ header, gameList }: GameListRow) {
             width={450}
             height={253}
             key={game.id}
-            className="w-[338px] h-auto rounded-lg"
+            // className="w-[338px] h-auto rounded-lg"
+            className="min-w-[175px] w-[19%] h-auto rounded-lg"
           />
         ))}
         <div className="absolute right-4 bottom-[50%]">

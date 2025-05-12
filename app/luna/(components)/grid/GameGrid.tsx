@@ -14,7 +14,7 @@ export default function GameGrid() {
   ];
 
   return (
-    <div>
+    <div className="w-full">
       <ContinuePlaying />
       {gameList.map((list: LunaGameList, index) => {
         const header = gameGridHeaders[index];

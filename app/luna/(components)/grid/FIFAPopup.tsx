@@ -38,7 +38,8 @@ export default function FIFAPopup() {
         alt="FIFA Thumbnail"
         width={2560}
         height={1440}
-        className="rounded-md w-[338px] cursor-pointer"
+        // className="rounded-md w-[300px] cursor-pointer"
+        className="min-w-[175px] w-[300px] h-auto rounded-md cursor-pointer"
       />
 
       <div
